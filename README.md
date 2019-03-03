@@ -96,5 +96,9 @@ $ php bin/console fos:user:promote itsudatte
 $ php bin/console cache:clear
 $ php bin/console debug:translation es --domain=messages
 
+php-xml
+php-intl
+php-mbstring
+php-curl
 
 ```
