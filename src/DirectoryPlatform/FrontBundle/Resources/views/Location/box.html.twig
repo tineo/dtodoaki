@@ -1,0 +1,23 @@
+<div class="location" {% if location.getImageName() %}style="background-image: url('{{ vich_uploader_asset(location, 'image') }}');"{% endif %}>
+    <div class="location-inner">
+        <a href="{{ path('location_detail', {'slug': location.getSlug()}) }}" class="location-link"></a>
+
+        <div class="location-content">
+            <div class="location-title">
+                <h3>
+                    <a href="{{ path('location_detail', {'slug': location.getSlug()}) }}">
+                        {{ location.getName() }}
+                    </a>
+                </h3>
+
+                <p>                
+	                {% transchoice location.getListings()|length %}
+	                    {0} No available listings|{1} %count% available listing|]1,Inf[%count% available listings
+	                {% endtranschoice %}                	
+                </p>
+            </div><!-- /.location-title -->
+
+            <a href="{{ path('location_detail', {'slug': location.getSlug()})}}" class="btn btn-primary">{{ 'Show all'|trans }}</a>
+        </div>
+    </div><!-- /.location-inner -->
+</div><!-- /.location-->

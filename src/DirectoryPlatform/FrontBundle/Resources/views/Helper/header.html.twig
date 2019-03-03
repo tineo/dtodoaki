@@ -1,0 +1,153 @@
+<div class="header-wrapper">
+    <div class="header">
+        <div class="container{% if fullwidth is defined %}-fluid{% endif %}">
+            <div class="header-brand">
+                <a href="{{ path('homepage') }}">
+                    <span class="header-brand-image">                        
+                        <svg width="40px" height="50px" viewBox="0 0 40 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="logo" transform="translate(-20.000000, -15.000000)" stroke="#FF1D47" stroke-width="3">
+                                    <g id="Marker" transform="translate(22.000000, 17.000000)">
+                                        <path d="M18,45.2332275 C30,33.8305966 36,24.7932582 36,18.1212121 C36,8.11314302 27.9411255,0 18,0 C8.0588745,0 0,8.11314302 0,18.1212121 C0,24.7932582 6,33.8305966 18,45.2332275 Z" id="Oval"></path>
+                                        <ellipse id="Oval-2" cx="18" cy="16.7272727" rx="5.53846154" ry="5.57575758"></ellipse>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        {#
+                        The logo
+
+                        <img src="{{ asset('bundles/front/img/logo.svg') }}" alt="{{ 'Home'|trans }}" class="image-svg">
+                        #}
+                    </span><!-- /.header-brand-image -->
+
+                    <span class="header-brand-title">
+                        <!--<strong>Dtodoaqui</strong><span>App</span>-->
+                        <strong>Dtodoaqui</strong>
+                    </span><!-- /.header-brand-title -->
+                </a>
+            </div><!-- /.header-brand -->
+
+            <div class="header-nav-primary">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="{{ path('homepage') }}" class="nav-link {% if menu_active is defined and menu_active == 'home' %}active{% endif %}">
+                            {{ 'Home'|trans }}
+                        </a> 
+                    </li><!-- /.nav-item -->
+
+                    <li class="nav-item">
+                        <a href="{{ path('listing') }}" class="nav-link {% if menu_active is defined and menu_active == 'listings' %}active{% endif %}">
+                            {{ 'Listings'|trans }}
+                        </a> 
+                    </li><!-- /.nav-item -->
+
+                    <li class="nav-item">
+                        <a href="{{ path('post') }}" class="nav-link {% if menu_active is defined and menu_active == 'posts' %}active{% endif %}">
+                            {{ 'Blog'|trans }}
+                        </a> 
+                    </li><!-- /.nav-item -->                    
+                    
+                    {#
+                    <li class="nav-item dropdown">
+                        <a href="{{ path('listing') }}" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                            {{ 'Locations'|trans }}
+                        </a> 
+
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">Item 1</a>
+                            <a href="#" class="dropdown-item">Item 2</a>
+                            <a href="#" class="dropdown-item">Item 3</a>
+                            <a href="#" class="dropdown-item">Item 4</a>
+                            <a href="#" class="dropdown-item">Item 5</a>
+                        </div><!-- /.sub-menu -->
+                    </li><!-- /.nav-item -->                    
+                    #}
+                </ul><!-- /.nav -->
+            </div><!-- /.header-nav-primary -->
+
+            <div class="header-nav-secondary">
+                <ul class="nav">
+                    {% if not app.user %}
+                        <li class="nav-item hidden-sm-down">
+                            <a href="{{ path('fos_user_security_login') }}" class="nav-link" data-toggle="modal" data-target="#modal-login">
+                                {{ 'Login'|trans }}
+                            </a>
+                        </li>
+
+                        <li class="nav-item hidden-sm-down">
+                            <a href="{{ path('fos_user_registration_register') }}" class="nav-link" data-toggle="modal" data-target="#modal-register">
+                                {{ 'Register'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a href="{{ path('listing_create')}}" class="nav-link nav-btn">
+                            <i class="fa fa-plus"></i> {{ 'Add Listing'|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.header-nav-secondary -->
+
+            {% if app.user %}
+                <div class="header-nav-user">
+                    <ul class="nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                {% spaceless %}
+                                    {% if app.user.profile and app.user.profile.getAvatarName() %}
+                                        <img src="{{ vich_uploader_asset(app.user.profile, 'avatarImage') }}" alt="{{ app.user.getProfile().getDisplayName() }}">
+                                    {% else %}
+                                        <div class="dropdown-avatar">
+                                            {% if app.user.profile %}
+                                                {{ app.user.profile.getInitials() }}
+                                            {% else %}
+                                                {{ app.user.getUsername()|first }}
+                                            {% endif %}
+                                        </div><!-- /.dropdown-avatar -->
+                                    {% endif %}
+
+                                    {% if app.user.getProfile() %}
+                                        <span>{{ app.user.getProfile().getDisplayName() }}</span>
+                                    {% else %}
+                                        <span>{{ app.user.getUsername() }}</span>
+                                    {% endif %}
+                                {% endspaceless %}
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="header-dropdown">
+                                {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+                                    <a class="dropdown-item" href="{{ path('admin_dashboard') }}">{{ 'Admin Dashboard'|trans }}</a>
+                                {% endif %}
+
+                                <a class="dropdown-item" href="{{ path('listing_my') }}">{{ 'Listings'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('favorite') }}">{{ 'Favorites'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('search') }}">{{ 'Searches'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('order') }}">{{ 'Orders'|trans }}</a>                                
+                                <a class="dropdown-item" href="{{ path('profile_update') }}">{{ 'Your Profile'|trans }}</a>                                
+                                <a class="dropdown-item" href="{{ path('fos_user_change_password') }}">{{ 'Change Password'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'Logout'|trans }}</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item shopping-cart">
+                            <a href="{{ path('cart') }}" class="nav-link">
+                                <i class="fa fa-shopping-cart"></i>
+
+                                <span class="shopping-cart-title">{{ 'Shopping cart'|trans }}</span>
+
+                                <span class="badge">{{ cart_get_count() }}</span><!-- /.badge -->
+                            </a><!-- /.nav-link -->
+                        </li><!-- /.shopping-cart -->
+                    </ul><!-- /.nav -->
+                </div><!-- /.header-nav-user -->
+            {% endif %}
+        </div><!-- /.container -->
+    </div><!-- /.header -->
+
+    <div class="header-toggle">
+        <span>{{ 'Toggle Navigation'|trans }}</span>
+    </div><!-- /.header-toggle -->
+</div><!-- /.header-wrapper -->

@@ -1,0 +1,13 @@
+{% extends 'FrontBundle::Layout/default.html.twig' %}
+
+{% block body %}
+    <div class="page-wrapper">
+        {% include('FrontBundle::Helper/header.html.twig') with {'fullwidth': true} %}
+
+        {% include('AppBundle::Helper/messages.html.twig') %}
+
+        <div class="main-wrapper fullwidth">
+            {% block content %}{% endblock %}
+        </div><!-- /.main-wrapper -->
+    </div><!-- /page-wrapper -->
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'listings' %}
+
+{% set actions = [
+    {
+        'link': path('listing_detail', {'slug': listing.getSlug()}),
+        'title': 'View'|trans,
+    },    
+    {
+        'link': path('admin_listing_create'),
+        'title': 'Create'|trans,
+    }
+] %}
+
+{% set title = 'Update Listing'|trans ~ ' ' ~ listing.getName() %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+    },
+    {
+        'link': path('admin_listing'), 'title': 'Listings'|trans,
+    },
+    {
+        'title': 'Update Listing'|trans
+    }
+] %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

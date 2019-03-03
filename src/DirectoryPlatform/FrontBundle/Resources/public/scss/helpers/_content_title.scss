@@ -1,0 +1,67 @@
+.content-title {
+	background-color: #fff; 
+	border-bottom: 1px solid rgba($color-black, .06);
+	margin: 0 0 50px 0;
+	padding: 40px 0;
+	position: relative;
+
+	h2 {
+		font-family: $font-secondary;
+		font-size: 30px;
+		margin: 0;
+		padding: 0;
+
+        small {
+            color: rgba($color-black, .5);
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        @include media-breakpoint-down(md) {
+          margin: 0 0 30px 0;
+        }
+	}
+
+  .breadcrumb {
+    background-color: transparent;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+
+    li {
+      &:before {
+        color: rgba($color-black, .1);
+      }
+
+      &.active {
+        color: rgba($color-black, .5);
+      }
+    }
+
+    a {
+      color: rgba($color-black, .5);
+      text-decoration: none;
+
+      &:hover {
+      	color: $color-primary;
+      }
+    }
+  }	
+}
+
+.content-title-actions {
+  @include media-breakpoint-up(md) { 
+  	position: absolute;
+  	right: 0;
+  	top: 50%;
+  	transform: translateY(-50%);
+  }
+
+  a {
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Update Profile'|trans %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+    	{% include 'FrontBundle::Helper/content_title.html.twig' %}
+
+        <div class="content">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div><!-- /.content -->
+    </div><!-- /.container -->
+{% endblock %}

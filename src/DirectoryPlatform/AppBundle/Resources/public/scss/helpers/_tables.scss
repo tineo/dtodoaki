@@ -1,0 +1,146 @@
+.table-wrapper {  
+  @include media-breakpoint-down(md) {
+    max-width: calc(100vw - 64px - 60px);
+  }  
+
+  margin: 0 0 30px 0;
+  overflow-x: auto;
+
+  table { 
+    background-color: #fff;
+    border: 1px solid rgba($color-black, .08);
+    border-radius: 3px; 
+  }
+}
+
+.table {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba($color-black, .05);
+  margin: 0 0 30px 0;
+
+  th, td {
+    border-color: $color-gray;
+    padding-left: 20px;
+    padding-right: 20px;
+    vertical-align: middle;
+  }
+
+  thead {
+    th {
+      border: 0;
+      font-weight: 500;
+      position: relative;
+
+      &:after {
+        background-color: $color-gray;
+        bottom: 1px;
+        content: '';
+        display: block;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+
+  .btn-group {
+    .btn {
+      padding: 0 12px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.table-bordered {
+  border-color: $color-gray;
+
+  td {
+    border-color: $color-gray;
+  }
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba($color-black, .01);
+}
+
+.table-min-width {
+  width: 1px;
+  white-space: nowrap;
+}
+
+.table-center {
+  text-align: center;
+}
+
+.table-image {
+  img {
+    display: block;
+    height: auto;
+    max-width: 64px;
+  }
+}
+
+.table-status {
+  .fa {
+    font-size: 12px;
+  }
+
+  .fa-check {
+    color: $color-green;
+  }
+
+  .fa-close {
+    color: $color-red;
+  }
+}
+
+.table-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.table-card-image {
+  background-color: rgba($color-black, .12);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  height: 45px;
+  margin: 0 15px 0 0;
+  width: 60px;
+}
+
+.table-card-content {
+  align-items: center;
+  display: flex;
+}
+
+.table-card-title {
+  font-weight: 500;
+  max-width: 130px;
+
+  a {
+    color: $color-black;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.table-card-subtitle {
+  color: rgba($color-black, .5);
+}

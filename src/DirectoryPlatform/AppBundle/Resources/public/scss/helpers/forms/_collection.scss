@@ -1,0 +1,138 @@
+.collection-images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .control-label {
+    display: none;
+  }
+
+  > div {
+    //background-color: rgba($color-black, .03);
+    box-sizing: content-box;
+    margin: 0 20px 30px 0;
+    min-height: 110px;
+    padding: 0;
+    position: relative;
+    width: 180px;
+
+    img {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+  }
+}
+
+.collection-images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  > a, > div {
+    box-sizing: content-box;
+    margin: 0 20px 30px 0;
+    min-height: 110px;
+    padding: 0;
+    width: 180px;
+
+    .control-label {
+      display: none;
+    }
+
+    img {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  > div {
+    background-color: rgba($color-black, .04);
+    position: relative;
+
+    .form-group {
+      margin: 0;
+    }
+
+    .vich-image {
+
+      .form-check {
+        //background-color: $color-black;
+        left: 12px;
+        margin: 0;
+        position: absolute;
+        top: 12px;
+
+        .form-check-label {
+          color: #fff;
+          font-size: 13px;
+          text-shadow: 0 1px 2px rgba($color-black, .3);
+        }
+      }
+
+      .form-group {
+        display: none;
+      }
+
+      .vich-placeholder {
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+
+    input {
+      width: auto;
+    }
+  }
+
+  .collection-rescue-add {
+    align-items: center;
+    border: 2px dashed rgba($color-black, .08);
+    color: rgba($color-black, .5);
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    text-decoration: none;
+
+    &:hover, &:active, &:focus {
+      color: rgba($color-black, .5);
+      text-decoration: none;
+    }
+  }
+
+  .collection-actions {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+
+    a {
+      background-color: $color-primary;
+      border-radius: 50%;
+      box-shadow: 0 1px 2px rgba($color-black, .2);
+      color: #fff;
+      display: inline-block;
+      font-size: 10px;
+      height: 20px;
+      line-height: 22px;
+      text-align: center;
+      width: 20px;
+    }
+  }
+
+  .collection-new {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px !important;
+    width: auto !important;
+
+    .vich-image {
+      > input, .form-group {
+        display: block !important;
+      }
+    }
+  }
+}

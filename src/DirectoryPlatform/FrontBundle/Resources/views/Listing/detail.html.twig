@@ -1,0 +1,153 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set menu_active = 'listings' %}
+
+{% set title = listing.getName() %}
+
+{% set actions = [
+    {
+        'title': 'Claim'|trans,
+        'link': path('claim_create', {'id': listing.getId()}),
+    },
+    {
+        'title': 'Favorite'|trans,
+        'link': path('favorite_add', {'id': listing.getId()}),
+    },    
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if listing.getHeader() == constant('DirectoryPlatform\\AppBundle\\Entity\\Listing::HEADER_GALLERY') %}
+        {% include 'FrontBundle::Listing/Header/gallery.html.twig' %}
+    {% elseif listing.getHeader() == constant('DirectoryPlatform\\AppBundle\\Entity\\Listing::HEADER_SINGLE_IMAGE') %}
+        {% include 'FrontBundle::Listing/Header/image.html.twig' %}
+    {% elseif listing.getHeader() == constant('DirectoryPlatform\\AppBundle\\Entity\\Listing::HEADER_MAP') %}
+        {% include 'FrontBundle::Listing/Header/map.html.twig' %}
+    {% else %}
+        <div class="container">
+            {% include 'FrontBundle::Helper/content_title.html.twig' %}
+        </div><!-- /.container -->
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-lg-8">
+                <div class="content">
+                    {% if listing.getDescription() %}
+                        <div class="post-block post-block-description">
+                            <h3>{{ 'Description'|trans }}</h3>
+
+                            {{ listing.getDescription|raw }}
+                        </div><!-- /.post-block -->
+                    {% endif %}
+
+                    {% if listing.getAmenities()|length %}
+                        <div class="post-block post-block-amenities">
+                            <h3>{{ 'Amenities'|trans }}</h3>
+
+                            <ul>
+                                {% for amenity in listing.getAmenities() %}
+                                    <li>
+                                        <a href="{{ path('amenity_detail', {'slug': amenity.getSlug()})}}">
+                                            {% if amenity.getFontIcon() %}
+                                                <i class="fa {{ amenity.getFontIcon() }}"></i>
+                                            {% endif %}
+                                            
+                                            {{ amenity.getName() }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div><!-- /.post-block -->
+                    {% endif %}
+
+                    {% if listing.getFields()|length %}
+                        <div class="post-block post-block-fields">
+                            <h3>{{ 'Custom Fields'|trans }}</h3>
+
+                            <ul>
+                                {% for field in listing.getFields() %}
+                                    <li>
+                                        <span>{{ field.getDataKey() }}</span>
+                                        <strong>{{ field.getDataValue() }}</strong>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div><!-- /.post-block -->
+                    {% endif %}
+
+                    {% if reviews|length %}
+                        <div class="post-block">
+                            <div class="review-stat">
+                                <div class="review-icon">
+                                </div><!-- /.review-icon -->
+
+                                <div class="review-total">
+                                    <strong>{{ listing.getRatingPercent() }}%</strong>
+                                    <span>
+                                        {% trans with {'%count%': reviews|length} %}
+                                            Rated by <b>%count%</b> users
+                                        {% endtrans %}                                 
+                                    </span>
+                                </div><!-- /.review-total -->
+
+                                <div class="review-overview">
+                                    <ul>
+                                        {% for rating in listing.getRatingOverview() %}
+                                            <li>
+                                                <span class="key">{{ rating.label }}</span>                                            
+                                                <span class="divide"></span>
+                                                <span class="value">{{ rating.percent }}%</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div><!-- /.review-overview -->
+                            </div><!-- /.review-stat --> 
+                        </div><!-- /.post-block -->
+
+                        <div class="post-block post-block-reviews">
+                            <h3>{{ 'Reviews'|trans }}</h3>
+
+                            {% for review in reviews %}
+                                {% include 'FrontBundle::Review/row.html.twig' %}
+                            {% endfor %}
+                        </div><!-- /.post-block-->
+                    {% endif %}
+
+                    <div class="post-block post-block-review-form">
+                        <h3>{{ 'Post New Review'|trans }}</h3>
+
+                        <div class="review-form">
+                            {{ form_start(form_review) }}
+                            {{ form_widget(form_review) }}
+                            {{ form_end(form_review) }}
+                        </div><!-- /.review-form -->
+                    </div><!-- /.post-block -->
+
+                    <div class="report">
+                        <a href="{{ path('report_create', {'id': listing.getId() }) }}">
+                            {{ 'Report listing'|trans }}
+                        </a>
+                    </div><!-- /.report -->
+                </div><!-- /.content -->
+            </div><!-- /.col-* -->
+
+            <div class="col-md-5 col-lg-4">
+                <div class="sidebar">
+                    {% include 'FrontBundle::Widget/agent.html.twig' with {'user': listing.getUser()} %}
+
+                    {% include 'FrontBundle::Widget/position.html.twig' %}
+
+                    {% include 'FrontBundle::Widget/share.html.twig' %}
+
+                    {% include 'FrontBundle::Widget/gallery.html.twig' %}
+
+                    {% include 'FrontBundle::Widget/opening_hours.html.twig' %}
+
+                    {% include 'FrontBundle::Widget/inquire.html.twig' with {'form': form_inquire}%}
+                </div><!-- /.sidebar -->
+            </div><!-- /.col-* -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+{% endblock %}

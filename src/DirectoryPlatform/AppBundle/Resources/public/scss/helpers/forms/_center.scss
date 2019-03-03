@@ -1,0 +1,41 @@
+.form-center {
+  margin: 100px 0;
+
+  p {
+    color: rgba($color-black, .5);
+
+    a {
+      color: rgba($color-black, .5);
+    }
+  }
+
+  .clearfix {
+    margin: 0;
+
+    .form-group {
+      float: left;
+      margin: 9px 0 0 0;
+    }
+
+    .btn {
+      float: right;
+    }
+  }
+
+  form {
+    border: 1px solid rgba($color-black, .08);
+    border-radius: 10px;
+    padding: 30px;
+  }
+
+  .nav {
+    justify-content: center;
+    margin: 15px 0 0 0;
+    text-align: center;
+  }
+
+  .nav-link {
+    color: rgba($color-black, .5);
+    font-size: 12px;
+  }
+}

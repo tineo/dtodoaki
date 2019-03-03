@@ -1,0 +1,107 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'posts' %}
+
+{% set title = 'Posts'|trans %}
+
+{% set actions = [
+    {
+        'link': path('admin_post_create'),
+        'title': 'Create'|trans,
+    }
+] %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+    },
+    {
+        'title': 'Posts'|trans
+    }
+] %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if posts|length %}
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'Title'|trans }}</th>
+                        <th class="table-center">{{ 'Category'|trans }}</th>
+                        <th class="table-center">{{ 'Published'|trans }}</th>
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <td>
+                                <div class="table-card">
+                                    {{ post.getImage() }}
+                                    <div class="table-card-image"
+                                            {% if post.getImageName() %}
+                                        style="background-image: url('{{ vich_uploader_asset(post, 'image') }}');"
+                                            {% endif %}>
+                                    </div><!-- /.table-card-image -->
+
+                                    <div class="table-card-content">
+                                        <div class="table-card-content-inner">
+                                            <div class="table-card-title">
+                                                <a href="{{ path('post_detail', {'slug': post.getSlug()}) }}" target="_blank">
+                                                    {{ post.getName() }}
+                                                </a>
+                                            </div><!-- /.table-card-title -->
+                                        </div><!-- /.table-card-content-inner -->
+                                    </div><!-- /.table-card-content -->
+                                </div><!-- /.table-card -->
+                            </td>
+
+                            <td class="table-min-width table-center">
+                                {% if post.getCategory() %}
+                                    <a href="{{ path('category_detail', {'slug': post.getCategory().getSlug()}) }}" target="_blank">
+                                        {{ post.getCategory() }}
+                                    </a>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td class="table-min-width table-center table-status">
+                                {% if post.getIsPublished() %}
+                                    <i class="fa fa-check"></i>
+                                {% else %}
+                                    <i class="fa fa-close"></i>
+                                {% endif %}
+                            </td>
+
+                            <td class="table-min-width">
+                                <div class="btn-group">
+                                    <a href="{{ path('admin_post_update', {'id': post.getId()}) }}" class="btn">
+                                        {{ 'Update' }}
+                                    </a>
+
+                                    <a href="{{ path('admin_post_delete', {'id': post.getId()}) }}" class="btn">
+                                        {{ 'Delete' }}
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(posts) }}
+            </div><!-- /.navigation -->
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

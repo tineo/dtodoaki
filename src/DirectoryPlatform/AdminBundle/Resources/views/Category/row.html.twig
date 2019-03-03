@@ -1,0 +1,36 @@
+
+<tr>
+    <td class="table-min-width table-center">
+        {% if category.getFontIcon() %}
+            <i class="fa {{ category.getFontIcon() }}"></i>
+        {% else %}
+            -
+        {% endif %}
+    </td>
+
+    <td>{{ hierarchy.getName(category) }}</td>
+
+    <td class="table-min-width table-center">
+        <a href="{{ path('category_detail', {'slug': category.getSlug()})}}" target="_blank">
+            {{ category.getSlug() }}
+        </a>
+    </td>
+
+    <td class="table-min-width">
+        <div class="btn-group">
+            <a href="{{ path('admin_category_update', {'id': category.getId()}) }}" class="btn">
+                {{ 'Update' }}
+            </a>
+
+            <a href="{{ path('admin_category_delete', {'id': category.getId()}) }}" class="btn">
+                {{ 'Delete' }}
+            </a>
+        </div>
+    </td>
+</tr>
+
+{% if category.getCategories() %}
+    {% for subCategory in category.getCategories() %}
+        {% include 'AdminBundle::Category/row.html.twig' with {category: subCategory}%}
+    {% endfor %}
+{% endif %}

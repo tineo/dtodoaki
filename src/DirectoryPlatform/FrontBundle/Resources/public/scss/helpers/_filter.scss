@@ -1,0 +1,44 @@
+.filter {
+	margin: 0 0 40px 0;
+	position: relative;
+
+	form {
+		> div {
+			@include clearfix();
+
+			margin: 0 -15px -15px -15px;
+
+			.form-group, .form-check {
+				clear: none;
+				float: left;
+				height: 42px;
+				margin: 0 0 30px 0;
+				padding: 0 15px;
+				width: 33.3333%;
+
+				@include media-breakpoint-down(sm) {
+					width: 100%; 
+				}
+
+				&.button {
+					clear: both;					
+					margin: 0;
+					width: auto;
+				}
+
+				&.price, &.radius {
+					width: calc(50% - 115px);
+
+					@include media-breakpoint-down(sm) {
+						width: calc(100% - 115px);
+					}
+				}
+			}	
+
+			.form-check {
+				min-width: 115px;
+				width: auto;
+			}
+		}
+	}
+}

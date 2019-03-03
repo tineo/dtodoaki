@@ -1,0 +1,93 @@
+{% extends 'FrontBundle::Layout/base_fullwidth.html.twig' %}
+
+{% set menu_active = 'listings' %}
+
+{% set title = 'Listings & Classifieds'|trans %}
+	
+{% set actions = [
+	{		
+		'link': path('search_create', {'entity': 'listing'}),
+		'title': 'Save Search Query'|trans
+	}
+] %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'title': 'Listings'|trans
+    }
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}	    
+	<div class="content content-map-results">
+		<div class="container-fluid"> 
+			<div class="filter-wrapper">
+				<div class="filter">
+			        {{ form_start(filter) }}
+			        {{ form_widget(filter) }}
+			        {{ form_end(filter) }}
+		    	</div><!-- /.filter -->
+	    	</div><!-- /.filter-wrapper -->
+	            
+	        {% include 'FrontBundle::Listing/options.html.twig' %} 
+
+			{% if listings|length %}				
+				{% if display == 'grid' %}
+					<div class="row">					
+						{% for listing in listings %}											
+							<div class="col-md-6">
+								{% include 'FrontBundle::Listing/box.html.twig' %}
+							</div><!-- /.col-* -->													
+						{% endfor %}					
+					</div><!-- /.row -->
+				{% elseif display == 'row' %}						
+					{% for listing in listings %}
+						{% include 'FrontBundle::Listing/row.html.twig' %}						
+					{% endfor %}
+				{% endif %}
+			{% else %}
+				{% include 'AppBundle::Helper/empty.html.twig' %}
+			{% endif %}
+		</div><!-- /.container -->
+	</div><!-- /.content -->	
+
+	<div class="content-map">
+		<div class="content-map-inner">
+			<div id="google-map-markers" 
+				{% if app.request.get('place_latitude') and app.request.get('place_longitude') %}
+					data-latitude="{{ app.request.get('place_latitude')}}"
+					data-longitude="{{ app.request.get('place_longitude')}}"
+				{% endif %}
+				 class="google-map-markers">
+				 	{% if listings|length %}
+				 		{% for listing in listings %}
+				 			{% if listing.getLatitude() and listing.getLongitude() %}
+				 				{% spaceless %}<div data-latitude="{{ listing.getLatitude() }}" 
+				 					 data-longitude="{{ listing.getLongitude() }}"
+				 					 data-link="{{ path('listing_detail', {'slug': listing.getSlug()}) }}"
+				 					 data-id="{{ listing.getId() }}"
+				 					 {% if listing.getPrice() %}data-price="{{ listing.getPrice()|localizedcurrency(currency) }}"{% endif %}
+				 					 {% if listing.getName() %}data-name="{{ listing.getName() }}"{% endif %}
+				 					 {% if listing.getAddress() %}data-address="{{ listing.getAddress() }}"{% endif %}
+				 				     {% if listing.getFeaturedImage() %}data-image="{{ vich_uploader_asset(listing.getFeaturedImage(), 'image') }}"{% endif %}></div>{% endspaceless %}
+				 			{% endif %}
+				 		{% endfor %}
+				 	{% endif %}
+			</div><!-- /.google-map-markers -->
+		</div><!-- /.content-map-inner -->
+
+		<div class="content-map-actions">
+			<div id="google-map-action-zoom-in" class="content-map-action">
+				<i class="fa fa-plus"></i>
+			</div><!-- /.content-map-action -->
+
+			<div id="google-map-action-zoom-out" class="content-map-action">
+				<i class="fa fa-minus"></i>
+			</div><!-- /.content-map-action -->				
+		</div><!-- /.content-map-actions -->		
+	</div><!-- /.content-map -->
+{% endblock %}

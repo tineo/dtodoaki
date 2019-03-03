@@ -1,0 +1,53 @@
+.pagination {
+	margin: 0 0 40px 0;
+
+	.page-item {
+		.page-link {
+			border-color: rgba($color-black, .08);
+			color: rgba($color-black, .7);
+			padding: 12px 20px;
+			text-decoration: none;
+			transition: all .2s ease;
+
+			&:hover {
+				background-color: rgba($color-black, .02);
+			}
+
+			.fa {
+				color: rgba($color-black, .2);
+				font-size: 10px;
+				vertical-align: 1px;
+			}
+		}
+
+		&.active {
+			.page-link {
+				background-color: $color-primary;
+				border-color: $color-primary;
+				color: #fff;
+			}
+		}
+
+		&:first-child {
+			.page-link {
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+
+				.fa {
+					margin-right: 10px;
+				}
+			}
+		}
+
+		&:last-child {
+			.page-link {
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+
+				.fa {
+					margin-left: 10px;
+				}				
+			}
+		}		
+	}
+}

@@ -1,0 +1,79 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'claims' %}
+
+{% set title = 'Claims'|trans %}
+
+{% set breadcrumbs = [
+	{
+		'link': path('homepage'), 'title': 'Home'|trans,
+	},
+	{
+		'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+	},
+	{
+		'title': 'Claims'|trans
+	}
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if claims|length %}
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="table-min-width">{{ 'Listing'|trans }}</th>
+                        <th class="table-min-width">{{ 'User'|trans }}</th>
+                        <th>{{ 'Message'|trans }}</th>
+                        <th class="table-min-width table-center">{{ 'Approved'|trans }}</th>
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for claim in claims %}
+                        <tr>
+                            <td class="table-min-width">
+                                <a href="{{ path('listing_detail', {'slug': claim.listing.getSlug()}) }}" target="_blank">
+                                    {{ claim.listing.getName() }}
+                                </a>
+                            </td>
+
+                            <td class="table-min-width">                                
+                                {{ claim.getUser().getDisplayName() }}
+                            </td>                            
+
+                            <td>{{ claim.getMessage() }}</td>
+
+                            <td class="table-min-width table-center table-status">
+                                {% if claim.getIsApproved() %}
+                                    <i class="fa fa-check"></i>
+                                {% else %}
+                                    <i class="fa fa-close"></i>
+                                {% endif %}
+                            </td>
+
+                            <td class="table-min-width">
+                                <div class="btn-group">
+                                    {% if not claim.getIsApproved() %}
+                                        <a href="{{ path('admin_claim_approve', {'id': claim.getId() })}}" class="btn">{{ 'Approve'|trans }}</a>
+                                    {% else %}
+                                        {{ 'Nothing to do'|trans }}
+                                    {% endif %}
+                                </div><!-- /.btn-group -->
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(claims) }}
+            </div>
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

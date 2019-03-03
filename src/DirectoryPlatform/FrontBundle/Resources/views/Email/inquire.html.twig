@@ -1,0 +1,25 @@
+{% trans with {
+	'%listing_name%': inquire.getListing().getName(), 
+	'%link%': app.request.getSchemeAndHttpHost()~path('listing_detail', {'slug': inquire.getListing().getSlug()}),
+	'%name%': inquire.getName(),
+	'%email%': inquire.getEmail(),
+	'%message%': inquire.getMessage()
+} %}
+Hi,
+
+new inquire message has been sent from <a href="%link%">%listing_name%</a>.
+
+---
+
+<b>Name</b>
+
+%name%
+
+<b>Email</b>
+
+%email%
+
+<b>Message</b>
+
+%message%
+{% endtrans %}

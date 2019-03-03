@@ -1,0 +1,55 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'locations' %}
+
+{% set title = 'Locations'|trans %}
+
+{% set actions = [
+	{
+		'link': path('admin_location_create'),
+		'title': 'Create'|trans,
+	}
+] %}
+
+{% set breadcrumbs = [
+	{
+		'link': path('homepage'), 'title': 'Home'|trans,
+	},
+	{
+		'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+	},
+	{
+		'title': 'Locations'|trans
+	}
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if locations|length %}
+        <div class="table-wrapper">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'Image'|trans }}</th>
+                        <th>{{ 'Name'|trans }}</th>
+                        <th class="table-min-width table-center">{{ 'Slug'|trans }}</th>
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for location in locations %}
+                        {% include 'AdminBundle::Location/row.html.twig' %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(locations) }}
+            </div><!-- /.navigation -->
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

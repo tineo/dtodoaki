@@ -1,0 +1,148 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set title = 'Dashboard'|trans %}
+
+{% set active = 'dashboard' %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+    }
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="stat stat-green">
+                <div class="stat-key">{{ 'Total Listings'|trans }}</div><!-- /.stat-key -->
+                <div class="stat-value">{{ listings_count }}</div><!-- /.stat-value -->
+                <div class="stat-icon"><i class="fa fa-map-marker"></i></div>
+            </div><!-- /.stat -->
+        </div><!-- /.col-* -->
+
+        <div class="col-md-6 col-lg-3">
+            <div class="stat stat-red">
+                <div class="stat-key">{{ 'Total Users'|trans }}</div><!-- /.stat-key -->
+                <div class="stat-value">{{ users_count }}</div><!-- /.stat-value -->
+                <div class="stat-icon"><i class="fa fa-users"></i></div>
+            </div><!-- /.stat -->
+        </div><!-- /.col-* -->
+
+        <div class="col-md-6 col-lg-3">
+            <div class="stat stat-orange">
+                <div class="stat-key">{{ 'Total Reviews'|trans }}</div><!-- /.stat-key -->
+                <div class="stat-value">{{ reviews_count }}</div><!-- /.stat-value -->
+                <div class="stat-icon"><i class="fa fa-comments"></i></div>
+            </div><!-- /.stat -->
+        </div><!-- /.col-* -->        
+
+        <div class="col-md-6 col-lg-3">
+            <div class="stat stat-blue">
+                <div class="stat-key">{{ 'Total Posts'|trans }}</div><!-- /.stat-key -->
+                <div class="stat-value">{{ posts_count }}</div><!-- /.stat-value -->
+                <div class="stat-icon"><i class="fa fa-file"></i></div>
+            </div><!-- /.stat -->
+        </div><!-- /.col-* -->        
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="page-header">{{ 'Recent Listings'|trans }}</h3>
+
+            {% if listings|length %}
+                <div class="table-wrapper">
+                    <table class="table">     
+                        <thead>
+                            <tr>
+                                <th>{{ 'Name'|trans }}</th>
+                                <th class="table-min-width table-center">{{ 'Published'|trans }}</th>
+                                <th class="table-min-width"></th>
+                            </tr>
+                        </thead>    
+
+                        <tbody>
+                            {% for listing in listings %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('admin_listing_update', {'id': listing.getId()} )}}">
+                                            {{ listing.getName() }}
+                                        </a>
+                                    </td>
+
+                                    <td class="table-min-width table-center table-status">
+                                        {% if listing.getIsPublished() %}
+                                            <i class="fa fa-check"></i>
+                                        {% else %}
+                                            <i class="fa fa-close"></i>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="table-min-width">
+                                        <div class="btn-group">
+                                            <a href="{{ path('admin_listing_update', {'id': listing.getId()}) }}" class="btn">{{ 'Update'|trans }}</a>
+                                            <a href="{{ path('admin_listing_delete', {'id': listing.getId()}) }}" class="btn">{{ 'Delete'|trans }}</a>
+                                        </div><!-- /.btn-group -->
+                                    </td>
+                                </tr>
+                            {% endfor %}      
+                        </tbody>
+                    </table><!-- /.table -->
+                </div><!-- /.table-wrapper -->
+            {% else %}
+                {{ 'No listings found.'|trans }}
+            {% endif %}
+        </div><!-- /.col-* -->
+
+        <div class="col-lg-6">
+            <h3 class="page-header">{{ 'Recent Posts'|trans }}</h3>
+
+            {% if listings|length %}
+                <div class="table-wrapper">
+                    <table class="table">     
+                        <thead>
+                            <tr>
+                                <th>{{ 'Name'|trans }}</th>
+                                <th class="table-min-width table-center">{{ 'Published'|trans }}</th>
+                                <th class="table-min-width"></th>
+                            </tr>
+                        </thead>    
+
+                        <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('admin_post_update', {'id': post.getId()} )}}">
+                                            {{ post.getName() }}
+                                        </a>
+                                    </td>
+
+                                    <td class="table-min-width table-center table-status">
+                                        {% if post.getIsPublished() %}
+                                            <i class="fa fa-check"></i>
+                                        {% else %}
+                                            <i class="fa fa-close"></i>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="table-min-width">
+                                        <div class="btn-group">
+                                            <a href="{{ path('admin_post_update', {'id': post.getId()}) }}" class="btn">{{ 'Update'|trans }}</a>
+                                            <a href="{{ path('admin_post_delete', {'id': post.getId()}) }}" class="btn">{{ 'Delete'|trans }}</a>
+                                        </div><!-- /.btn-group -->
+                                    </td>
+                                </tr>
+                            {% endfor %}      
+                        </tbody>
+                    </table><!-- /.table -->
+                </div><!-- /.table-wrapper -->
+            {% else %}
+                {{ 'No posts found.'|trans }}
+            {% endif %}
+        </div><!-- /.col-* -->        
+    </div><!-- /.row -->
+{% endblock %}

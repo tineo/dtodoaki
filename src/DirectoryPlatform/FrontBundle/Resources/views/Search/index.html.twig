@@ -1,0 +1,55 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Saved Searches'|trans %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'FrontBundle::Helper/content_title.html.twig' %}
+
+        {% if searches|length %}
+            <div class="table-wrapper">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>{{ 'Query'|trans }}</td>
+                            <td>{{ 'Created'|trans }}</td>
+                            <td></td>
+                        </tr>
+                    </thead><!-- /.system-head -->
+
+                    <tbody>
+                        {% for search in searches %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('listing') }}?{{ search.getQuery() }}">
+                                        {{ search.getQuery()|striptags[:50] ~ ' ...' }}
+                                    </a>
+                                </td>
+
+                                <td>
+                                    {{ search.getCreated()|date("F jS \\a\\t g:ia") }}
+                                </td>
+
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn" href="{{ path('search_delete', {'id': search.getId()}) }}">
+                                            {{ 'Delete'|trans }}
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table><!-- /.system-table -->
+            </div><!-- /.table-wrapper -->
+            
+            <div class="navigation text-center">
+                {{ knp_pagination_render(searches) }}
+            </div>
+        {% else %}
+            {{ include('AppBundle::Helper/empty.html.twig') }}
+        {% endif %}
+    </div><!-- /.container -->
+{% endblock %}

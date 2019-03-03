@@ -1,0 +1,73 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Orders'|trans %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'FrontBundle::Helper/content_title.html.twig' %}
+
+        {% if orders|length %}
+            <div class="table-wrapper">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'ID'|trans }}</th>
+                            <th>{{ 'Total'|trans }}</th>
+                            <th>{{ 'Name'|trans }}</th>
+                            <th>{{ 'Status'|trans }}</th>
+                            <th>{{ 'Created'|trans }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>#{{ order.getId() }}</td>
+
+                                <td>{{ order.getPrice()|localizedcurrency(order.getCurrency) }}</td>
+
+                                <td>
+                                    {{ order.getName() }}
+                                </td>
+
+                                <td>
+                                    {% if order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_COMPLETED') %}
+                                        {{ 'Completed'|trans }}
+                                    {% elseif order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_CANCELED') %}
+                                        {{ 'Canceled'|trans }}
+                                    {% elseif order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_NEW') %}
+                                        {{ 'New'|trans }}
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {{ order.getCreated()|date("F jS \\a\\t g:ia") }}
+                                </td>
+
+                                <td>
+                                    {% if order.getStatus == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_COMPLETED') %}
+                                        <div class="btn-group">
+                                            <a class="btn" href="{{ path('invoice', {'id': order.getId()}) }}">
+                                                {{ 'View Invoice'|trans }}
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        <div>{{ 'No actions available'|trans }}</div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table><!-- /.table -->
+            </div><!-- /.table-wrapper -->
+            <div class="navigation text-center">
+                {{ knp_pagination_render(orders) }}
+            </div>
+        {% else %}
+            {{ include('AppBundle::Helper/empty.html.twig') }}
+        {% endif %}
+    </div><!-- /.container -->
+{% endblock %}

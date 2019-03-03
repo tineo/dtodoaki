@@ -1,0 +1,94 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'reviews' %}
+
+{% set title = 'Reviews'|trans %}
+
+{% set actions = [
+    {
+        'link': path('admin_review_create'),
+        'title': 'Create'|trans,
+    }
+] %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+    },
+    {
+        'title': 'Reviews'|trans
+    }
+] %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if reviews|length %}
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{ 'Title'|trans }}</th>
+                    <th class="table-min-width">{{ 'Author'|trans }}</th>
+                    <th class="table-min-width">{{ 'Date'|trans }}</th>
+                    <th class="table-center">{{ 'Published'|trans }}</th>
+                    <th class="table-min-width"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for review in reviews %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('listing_detail', {'slug': review.getListing().getSlug()}) }}" target="_blank">
+                                {{ review.getTitle() }}
+                            </a>
+                        </td>
+
+
+                        <td class="table-min-width">{{ review.getAuthor() }}</td>
+
+                        <td class="table-min-width">{{ review.getCreated()|date }}</td>
+
+                        <td class="table-min-width table-center table-status">
+                            {% if review.getIsPublished() %}
+                                <i class="fa fa-check"></i>
+                            {% else %}
+                                <i class="fa fa-close"></i>
+                            {% endif %}
+                        </td>
+
+                        <td class="table-min-width">
+                            <div class="btn-group">
+                                {% if not review.getIsPublished() %}
+                                    <a href="{{ path('admin_review_publish', {'id': review.getId()}) }}" class="btn">
+                                        {{ 'Publish' }}
+                                    </a>
+                                {% endif %}
+
+                                <a href="{{ path('admin_review_update', {'id': review.getId()}) }}" class="btn">
+                                    {{ 'Update' }}
+                                </a>
+
+                                <a href="{{ path('admin_review_delete', {'id': review.getId()}) }}" class="btn">
+                                    {{ 'Delete' }}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(reviews) }}
+            </div><!-- /.navigation -->
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

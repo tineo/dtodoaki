@@ -1,0 +1,111 @@
+'Listing & Directory Application for Symfony': Dtodoaqui
+'Directory Platform': Establecimientos
+Home: Inicio
+Listings: Establecimientos
+Blog: Noticias
+Login: Iniciar sesion
+Register: Resgistrate
+'Add Listing': Agregar Establecimiento
+'Toggle Navigation': Navegacion
+'Search City Gems': Busca establecimientos
+'Find the best spots or places in your city by using our directory theme. Start listing anything today.': Encuentra los mejores establecimientos cerca a ti
+'Keyword Search': Termino de busqueda
+'Type Place': Ingresa zona
+'All Categories': Todas las categorias
+'Search Listings': Buscar Local
+'Get best listing notifications happening near you.': Recibe notificaciones de establecimientos nuevos
+'Once per month we will post you e-mail informing you about nearby events. We promise that we will not share your e-mail address. You can always have an option to unsubscribe.': Ingresa tu correo electronico y recibe notificaciones de las novedades.
+E-mail address: Direccion E-mail
+Subscribe: Suscribete
+All rights reserved.: Todos los derechos reservados
+Created by: Creado por
+Create Account: Crear cuenta
+No results found: No se encontraron resultados
+Sorry about that, but there there are no results for your query.: Lo sentimos pero no hay elementos para mostrar.
+Listings & Classifieds: Clasificados
+Save Search Query: Guardar Busqueda
+Search by keyword: ¿Que buscar?
+Place Latitude: Latitud
+Place Longitude: Longitud
+Price: Precio
+Price from: Precio desde
+Price to: Precio hasta
+Radius: Radio
+Save search query: Guardar busqueda
+Show listings in grid: Mostrar en grilla
+Show listings in rows: Mostrar en listado
+Sign In: Crear cuenta
+Don't have an account? <a href="%link%">Create new account</a>, it takes less than a minute.:  ¿No tienes una cuenta? <a href="%link%">Crearte cuenta nueva</a>, no te tomará mas de un minuto.
+Return Back: Ir al inicio
+Registration: Registrar cuenta
+Forgot Password?: ¿Olvidaste tu contraseña?
+Blog Posts: Noticias
+Posts: Publicaciones
+Reset Password: Regenerar Contraseña
+Type your e-mail address below and we will get in touch with you as soon as possible.: Ingresa tu correo electronico debajo y te escribiremos los mas pronto posible.
+Account Registration: Registro de cuenta
+Already have an account? <a href="%link%">Sign in</a> and start creating new jobs or profile.: ¿Ya tiene una cuenta? <a href="%link%">Registrate</a> y usa la plataforma.
+My Listings: Mis registros
+Create: Crear
+Favorites: Favoritos
+Searches: Busquedas
+Orders: Ordenes
+Your Profile: Tu perfil
+Change Password: Cambiar contraseña
+Logout: Cerrar sesion
+Shopping cart: Carrito de compras
+Shopping Cart: Carrito de Compras
+No products found: No se enconro nada
+Back to homepage: Regresa al inicio
+Saved Searches: Busquedas guardadas
+Update Profile: Actualizar Perfil
+Avatar image: Imagen de perfil
+Select File: Seleccionar imagen
+Country: Pais
+First name: Nombres
+Last name: Apellidos
+Phone: Telefono
+Website: Sitio web
+Address: Direccion
+Save: Guardar
+Claim: Pedir titularidad
+Favorite: Hacer Favorito
+Post New Review: Publica un consejo
+Description: Descripcion
+Overview: Visión general
+Service: Servicio
+Pricing: Precio
+Report listing: Reportar establecimiento
+Get Direction: Conseguir Direccion
+Photo Gallery: Galeria de fotos
+Contact Owner: Contactar con registrante
+Name: Nombres
+Message: Mensaje
+Send Message: Enviar mensaje
+Create Report: Crear reporte
+Report: Reportar
+Create Listing: Crear establecimiento
+Header: Tipo de cabecera
+None: Ninguno
+Single Image: Solo una imagen
+Gallery: Galeria
+Map: Mapa
+Slug: Enlace corto
+Video youtube: Video de Youtube
+Opening hours: Horario de apertura
+Fields: Etiquetas
+__name__label__: Nombre de etiquetas
+Data key: Nombre de etiqueta
+Data value: Valor de etiqueta
+Geolocation: Geolocalización
+Search: Buscar
+Latitude: Latitud
+Longitude: Longitud
+Taxonomies: Taxonomia
+Category: Categoria
+Location: Localización
+Amenities: Comodidades
+No ratings, yet.: Sin calificaciones aun.
+Search query has been successfully saved.: La busqueda se ha guardado.
+Most Recent Listings: Locales mas recientes
+Find out most recent listings & classifieds added into our directory catalogue by our users.: Descubra los establecimientos y anuncios más recientes agregados a nuestro catálogo por nuestros usuarios. 

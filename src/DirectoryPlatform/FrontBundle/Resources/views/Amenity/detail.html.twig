@@ -1,0 +1,25 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = amenity.getName() %}
+	
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% include 'FrontBundle::Helper/content_title.html.twig' %}		
+
+		<div class="content">
+			<div class="row">
+				{% if listings|length %}
+					{% for listing in listings %}
+						<div class="col-md-4">
+							{% include 'FrontBundle::Listing/box.html.twig' %}
+						</div><!-- /.col-* -->
+					{% endfor %}
+				{% else %}
+					{% include 'AppBundle::Helper/empty.html.twig' %}
+				{% endif %}
+			</div><!-- /.row -->
+		</div><!-- /.content -->
+	</div><!-- /.container -->
+{% endblock %}

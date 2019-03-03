@@ -1,0 +1,16 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: row;
+  min-height: 100%;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.content {
+  > .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}

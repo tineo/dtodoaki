@@ -1,0 +1,35 @@
+<tr>
+    <td class="table-min-width table-image table-center">
+        {% if location.getImageName() %}
+            <img src="{{ vich_uploader_asset(location, 'image') }}" alt="{{ location.getName() }}">
+        {% else %}
+            -
+        {% endif %}
+    </td>
+
+    <td>{{ hierarchy.getName(location) }}</td>
+
+    <td class="table-min-width table-center">
+        <a href="{{ path('location', {'slug': location.getSlug()}) }}" target="_blank">
+            {{ location.getSlug() }}
+        </a>
+    </td>
+
+    <td class="table-min-width">
+        <div class="btn-group">
+            <a href="{{ path('admin_location_update', {'id': location.getId()}) }}" class="btn">
+                {{ 'Update' }}
+            </a>
+
+            <a href="{{ path('admin_location_delete', {'id': location.getId()}) }}" class="btn">
+                {{ 'Delete' }}
+            </a>
+        </div>
+    </td>
+</tr>
+
+{% if location.getLocations() %}
+    {% for subLocation in location.getLocations() %}
+        {% include 'AdminBundle::Location/row.html.twig' with {location: subLocation}%}
+    {% endfor %}
+{% endif %}

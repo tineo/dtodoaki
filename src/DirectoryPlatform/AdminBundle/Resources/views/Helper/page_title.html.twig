@@ -1,0 +1,27 @@
+<div class="page-title {% if class is defined %}{{ class }}{% endif %}">
+    {% if breadcrumbs is defined %}
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if breadcrumb.link is defined %}
+                    <li class="breadcrumb-item"><a href="{{ breadcrumb.link }}">{{ breadcrumb.title }}</a></li>
+                {% else %}
+                    <li class="breadcrumb-item active">{{ breadcrumb.title }}</li>
+                {% endif %}
+            {% endfor  %}
+        </ol>
+    {% endif %}
+
+    {% if title is defined %}
+        <h2>{{ title }}</h2>
+    {% endif %}
+
+    {% if actions is defined %}
+        <div class="page-title-actions">
+            {% for action in actions %}
+                <a href="{{ action.link }}" class="btn btn-primary">
+                    {{ action.title }}
+                </a>
+            {% endfor %}
+        </div><!-- /.page-title-actions -->
+    {% endif %}
+</div>

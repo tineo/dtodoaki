@@ -1,0 +1,25 @@
+{% extends "FrontBundle::Layout/base_simple.html.twig" %}
+
+{% block title %}{{ 'Register'|trans }}{% endblock %}
+
+{% block body_class %}page-center{% endblock %}
+
+{% block content %}
+    <div class="form-center">
+		<h1>{{ 'Account Registration'|trans }}</h1>
+
+		<p>
+		    {% trans with {'%link%': path('fos_user_security_login')} %}
+		        Already have an account? <a href="%link%">Sign in</a> and start creating new jobs or profile.
+		    {% endtrans %}
+		</p>
+
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+
+		<ul class="nav nav-pills">
+		    <li class="nav-item"><a class="nav-link" href="{{ path('homepage') }}">{{ 'Return Back'|trans }}</a></li>
+		    <li class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_login') }}">{{ 'Sign In'|trans }}</a></li>
+		    <li class="nav-item"><a class="nav-link" href="{{ path('fos_user_resetting_request') }}">{{ 'Forgot Password?'|trans }}</a></li>
+		</ul>            
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+.cta {
+  background-color: $color-black;
+  color: rgba(#fff, .7);
+  margin: 70px -1200px 0 -1200px;
+  padding: 70px 1200px;
+
+  h3 {
+    color: #fff;
+    font-family: $font-secondary;
+    font-size: 22px;
+    line-height: 32px;
+    margin: 0 0 20px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  form {
+    margin: 20px 0 0 0;
+  }
+
+  .form-group {
+    margin: 0;
+
+    &.email {
+      flex-grow: 1;
+    }
+  }
+
+  .form-control {
+    border: 0;
+    border-radius: 25px 0 0 25px;
+    height: 50px;
+    line-height: 50px;    
+    padding: 0 25px;
+
+    &:active, &:focus, &:active:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn {
+    border-radius: 0 25px 25px 0;
+    height: 50px;
+  }
+
+  #subscriber {
+    display: flex;
+  }
+}

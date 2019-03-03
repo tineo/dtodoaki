@@ -1,0 +1,21 @@
+<a href="{{ path('category_detail', {'slug': category.getSlug()})}}" class="category">
+    <span class="category-count">
+        {{ category.getListings()|length }}
+
+        {% if category.getListings()|length == 1 %}
+            {{ 'listing'|trans }}
+        {% else %}
+            {{ 'listings'|trans }}
+        {% endif %}
+    </span>
+
+    {% if category.getFontIcon() %}
+        <span class="category-icon">
+            <i class="fa {{ category.getFontIcon() }}"></i>
+        </span><!-- /.category-icon -->
+    {% endif %}
+
+    <span class="category-title">
+        {{ category.getName() }}
+    </span><!-- /.category-title -->
+</a><!-- /.category -->

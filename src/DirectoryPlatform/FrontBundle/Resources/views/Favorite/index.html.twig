@@ -1,0 +1,59 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Favorites'|trans %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_header %}{{ 'Favorites'|trans }}{% endblock %}
+
+{% block body_class %}content-simple{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'FrontBundle::Helper/content_title.html.twig' %}
+
+        {% if favorites|length > 0 %}
+            <div class="table-wrapper">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Name'|trans }}</th>
+                            <th>{{ 'Date Created'|trans }}</th>
+                            <th></th>
+                        </tr>
+                    </thead><!-- /.system-head -->
+
+                    <tbody>
+                        {% for favorite in favorites %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('listing_detail', {'slug': favorite.listing.getSlug()}) }}">
+                                        {{ favorite.listing.getName() }}
+                                    </a>
+                                </td>
+
+                                <td>
+                                    {{ favorite.getCreated()|date("F jS \\a\\t g:ia") }}
+                                </td>
+
+                                <td class="table-min-width">
+                                    <div class="btn-group">
+                                        <a class="btn" href="{{ path('favorite_remove', {'id': favorite.listing.getId()}) }}">
+                                            {{ 'Delete'|trans }}
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table><!-- /.table -->  
+            </div><!-- /.table-wrapper -->
+
+            <div class="navigation text-center">
+                {{ knp_pagination_render(favorites) }}
+            </div>
+        {% else %}
+            {{ include('AppBundle::Helper/empty.html.twig') }}
+        {% endif %}
+    </div><!-- /.container -->
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <title>{% block title %}{% endblock %} | {{ 'Admin - Directory Platform'|trans }}</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700" type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display:400" type="text/css">
+
+    {% stylesheets
+    '@AppBundle/Resources/public/libraries/summernote/summernote.css'
+    '@AdminBundle/Resources/public/css/styles.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css">
+    {% endstylesheets %}
+</head>
+
+<body class="admin {% block body_class %}{% endblock %}">
+
+<div class="page-wrapper">
+    {% include 'AdminBundle::Helper/toolbar.html.twig' %}
+
+    {% include 'AdminBundle::Helper/sidebar.html.twig' %}
+
+    <div class="main">
+        <div class="content">
+            <div class="container-fluid">
+                {% include 'AdminBundle::Helper/page_title.html.twig' %}
+
+                {% include 'AppBundle::Helper/messages.html.twig' %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </div><!-- /.content -->
+    </div><!-- /.main -->
+</div><!-- /.page-wrapper -->
+
+{% if google_maps_api_key %}
+    <script src="//maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&key={{ google_maps_api_key }}" type="text/javascript"></script>
+{% endif %}
+
+{% javascripts
+'@AppBundle/Resources/public/js/jquery.min.js'
+'@AppBundle/Resources/public/js/tether.min.js'
+'@AppBundle/Resources/public/js/bootstrap.min.js'
+'@AppBundle/Resources/public/libraries/summernote/summernote.min.js'    
+'@AppBundle/Resources/public/js/jquery.collection.js'
+'@AdminBundle/Resources/public/js/scripts.js'
+%}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+<div class="sidebar">
+    <div class="sidebar-title">
+        <strong>{{ 'Hello'|trans }} {{ app.user.getDisplayName() }}</strong>
+        <h2>{{ 'Admin Area'|trans }}</h2>
+    </div><!-- /.sidebar-title -->
+
+    <div class="sidebar-content">
+        {% include 'AdminBundle::Helper/sidebar_navigation.html.twig' %}
+    </div><!-- /.sidebar-content -->
+</div><!-- /.sidebar -->

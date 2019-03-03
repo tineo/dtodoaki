@@ -1,0 +1,353 @@
+@import 'forms/collection.scss';
+@import 'forms/center.scss';
+@import 'forms/checkbox_radio.scss';
+
+label {
+  color: rgba($color-black, .7);
+  cursor: pointer;
+
+  &.required {
+    &:after {
+      color: $color-red;
+      content: '*';      
+    }
+  }
+}
+
+legend {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+
+fieldset {
+  background-color: #fff;
+  border: 1px solid rgba($color-black, .08);
+  border-radius: 10px;
+  margin: 0 0 30px 0;
+  padding: 20px;
+
+  legend {
+    @include clearfix();
+
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    font-family: $font-secondary;
+    font-size: 20px;
+    margin: 0 0 20px 0;
+    width: 100%;
+  }
+
+  > div {
+    clear: both;
+  }
+
+  .form-group {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+select {
+  min-height: 42px;
+  height: 42px;
+}
+
+.input-group-addon {
+  background-color: #fff;
+  border-color: rgba($color-black, .08);
+  color: rgba($color-black, .5);
+  font-size: 12px;
+  font-weight: 500;   
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-control {
+  background-color: #fff;
+  border-radius: 5px;
+  border-color: rgba($color-black, .08);
+  color: $color-black;
+  font-family: $font-primary;
+  font-size: 14px;
+  line-height: 40px;
+  min-height: 40px;
+  padding: 0 12px;
+  transition: none;
+
+  &:focus {
+    border-color: lighten($color-primary, 10%);
+    box-shadow: inset  0 0 0 1px lighten($color-primary, 10%);
+  }
+}
+
+.note-editor.note-frame {
+  border-color: rgba($color-black, .08);
+  border-radius: 5px;
+
+  .note-btn-group.btn-group {
+    background-color: transparent;
+    border-radius: 0;
+    margin: 0 0 0 12px;
+
+    .btn {
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      line-height: 30px; 
+      padding: 0 16px 0 0;
+
+      i {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.note-editable {  
+  line-height: 24px;
+  padding: 8px 16px !important;
+}
+
+textarea.form-control {
+  line-height: 24px;
+  padding: 8px 12px;
+}
+
+.vich-placeholder {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+
+  input {
+    bottom: 0;
+    display: block;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+.vich-placeholder-label {
+  background-color: $color-primary;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  white-space: nowrap;
+  z-index: 11;
+}
+
+.featuredImage .vich-image {
+  position: relative;
+  width: 180px;
+
+  img {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+}
+
+.help-block {
+  border: 2px solid $color-red;
+  border-radius: 5px;
+  display: block;
+  margin: 10px 0 0 0;
+  padding: 12px;
+
+  ul {
+    margin: 0;
+  }
+}
+
+.bootstrap-select {
+  .dropdown-menu.open {
+    border: 0;
+    border-radius: 5px;
+    border-color: #eaeaea;    
+    box-shadow: 0 0 16px rgba($color-black, .16);
+    max-height: initial !important;
+
+    > .dropdown-menu {
+      display: block;
+      max-height: initial !important;
+
+      li {
+        &.selected {
+          a {
+            outline: none;            
+          }
+        }      
+
+        a {
+          color: rgba($color-black, .7);
+          display: block;
+          font-size: 14px;
+          padding: 0 12px;
+          text-decoration: none;
+
+          &:hover {
+            color: $color-primary;
+          }
+
+          .fa {
+            color: $color-primary;
+            font-size: 12px;
+            margin: 0 6px 0 0;
+            width: 16px;
+          }
+
+          .fa.check-mark {
+            color: $color-green;
+            font-size: 10px;
+            margin: 15px 0 0 0 !important;
+          }          
+        }
+      }
+    }
+  }
+
+  .btn { 
+    background-color: #fff;
+    border-radius: 5px;
+    border-color: rgba($color-black, .08);    
+    color: $color-black !important;
+    font-weight: 400;
+    height: 42px;
+    padding: 0 12px;
+
+    .fa {
+      color: $color-primary;
+      font-size: 12px;
+      margin: 0 8px 0 0;
+    }
+
+    .filter-option {
+      padding-right: 30px;
+    }
+    
+    &:after {
+      margin-left: -15px;
+    }
+
+    &:focus, &:active, &:focus:active {      
+      box-shadow: none;
+      outline: none !important;
+    }
+  }
+
+  &.show {
+    .btn {
+      border-color: lighten($color-primary, 10%);
+      box-shadow: inset  0 0 0 1px lighten($color-primary, 10%);
+    }
+  }
+}
+
+.noUi-horizontal {
+  background-color: darken($color-gray, 10%);
+  border: 0;
+  box-shadow: none;
+  height: 2px;
+  margin-top: 11px;
+
+  .noUi-tooltip {    
+    border: 0;
+    border-radius: 0;
+    color: $color-black;
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+
+  .noUi-connect {
+    background-color: $color-primary;
+    box-shadow: none;
+
+    .filter-primary & {
+      background-color: $color-black; 
+    }
+  }
+
+  .noUi-handle {
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba($color-black, .3);
+    cursor: pointer;
+    height: 17px;
+    top: -8px;
+    width: 17px;
+
+    &:before, &:after {
+      display: none;
+    }
+
+    &:after {     
+      background-color: darken($color-gray, 5%);
+      display: block;
+      border-radius: 50%;
+      height: 7px;
+      left: 5px;
+      position: absolute;
+      top: 5px;
+      width: 7px;
+    }
+
+    &:focus, &:active {
+      outline: none;
+    }
+  }
+}
+/********************************************************
+ * Company
+ *******************************************************/
+.fieldset-company {
+  @include clearfix();
+
+  .company, .companyName, .regNo, .vatNo, .country, .county, .city, .street, .postalCode {
+    float: left;
+    margin-right: 2%;
+    width: 32%;
+
+    input, select {
+      width: 100%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-right: auto;
+      width: 100%;
+    }
+  }
+
+  .company {
+    clear: both;
+  }
+
+  .companyName, .country, .street {
+    clear: left;
+  }
+
+  .vatNo, .city, .postalCode {
+    clear: right;
+    margin-right: 0;
+  }
+
+  .button {
+    clear: right;
+    float: right;
+    margin: 26px 0 0 0;
+    width: 32%;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: auto;
+      width: 100%;
+    }
+  }
+}

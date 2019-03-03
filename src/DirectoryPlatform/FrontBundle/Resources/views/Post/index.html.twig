@@ -1,0 +1,32 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set menu_active = 'posts' %}
+
+{% set title = 'Blog Posts'|trans %}	
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'title': 'Posts'|trans
+    }
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}	    
+	<div class="container">
+		<div class="content">
+			{% include 'FrontBundle::Helper/content_title.html.twig' %}
+			
+			{% if posts|length %}
+				{% for post in posts %}
+					{% include 'FrontBundle::Post/row.html.twig' %}
+				{% endfor %}
+			{% else %}
+				{{ include('AppBundle::Helper/empty.html.twig') }}
+			{% endif %}
+		</div><!-- /.content -->
+	</div><!-- /.container -->
+{% endblock %}

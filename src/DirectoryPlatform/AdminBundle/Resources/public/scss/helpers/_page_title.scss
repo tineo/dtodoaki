@@ -1,0 +1,49 @@
+.page-title {
+  background-color: #fff;
+  border-bottom: 1px solid rgba($color-black, .08);
+  height: 84px;
+  margin: 0 -30px 30px -30px;
+  padding: 0 30px;
+  position: relative;
+
+  .breadcrumb {
+    background-color: transparent;
+    border-radius: 0;
+    margin: 0;
+    padding: 20px 0 0 0;
+
+    li {
+      &:before {
+        color: rgba($color-black, .1);
+      }
+
+      &.active {
+        color: rgba($color-black, .5);
+      }
+    }
+
+    a {
+      color: rgba($color-black, .5);
+      text-decoration: none;
+    }
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
+
+.page-title-actions {
+  @include clearfix(); 
+  
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  .btn {
+    float: right;
+    margin: 0 0 0 20px;
+  }
+}

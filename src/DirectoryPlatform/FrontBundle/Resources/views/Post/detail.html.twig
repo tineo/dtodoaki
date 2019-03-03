@@ -1,0 +1,31 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set menu_active = 'posts' %}
+
+{% set title = post.getName() %}	
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('post'), 'title': 'Blog'|trans,
+    },    
+    {
+        'title': post.getName()
+    }
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}	    
+	<div class="container">
+		<div class="content">
+			{% include 'FrontBundle::Helper/content_title.html.twig' %}
+			
+			<div class="post-body">
+				{{ post.getDescription()|raw }}
+			</div><!-- /.post-content -->			
+		</div><!-- /.content -->
+	</div><!-- /.container -->
+{% endblock %}

@@ -1,0 +1,17 @@
+<div class="listing-options-wrapper">
+	<div class="listing-options">
+		<div class="listing-options-group">
+			<a href="{{ path('search_create', {'entity': 'listing'}) }}" title="{{ 'Save search query'|trans }}">
+				<i class="fa fa-bookmark-o"></i>
+			</a>
+
+			<a href="{{ path('listing', {'display': 'grid'}) }}" {% if display == 'grid' %}class="active"{% endif %} title="{{ 'Show listings in grid'|trans }}">
+				<i class="fa fa-th"></i>
+			</a>
+
+			<a href="{{ path('listing', {'display': 'row'}) }}" {% if display == 'row' %}class="active"{% endif %} title="{{ 'Show listings in rows'|trans }}">
+				<i class="fa fa-navicon"></i>
+			</a>
+		</div><!-- /.listing-options-group -->
+	</div><!-- /.listing-options -->
+</div><!-- /.listing-options-wrapper  -->

@@ -1,0 +1,11 @@
+{% extends 'FrontBundle::Layout/default.html.twig' %}
+
+{% block body %}
+    <div class="page-wrapper">
+        <div class="main-wrapper">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div><!-- /.container -->
+        </div><!-- /.main-wrapper -->
+    </div><!-- /page-wrapper -->
+{% endblock %}

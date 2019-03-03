@@ -1,0 +1,28 @@
+<div class="post">
+    <div class="post-inner">
+        {% if post.getImageName() is not empty %}
+            <a class="post-image" href="{{ path('post_detail', {'slug': post.getSlug()})}}" style="background-image: url('{{ vich_uploader_asset(post, 'image') }}');">
+            </a><!-- /.post-image -->
+        {% endif %}
+
+        <div class="post-content">
+            {% if post.getCategory() %}
+                <span class="post-category">{{ post.getCategory().getName() }}</span>
+            {% endif %}
+
+            <h3>
+                <a href="{{ path('post_detail', {'slug': post.getSlug()})}}">
+                    {{ post.getName() }}
+                </a>
+            </h3>
+
+            <div class="post-excerpt">
+                {% if post.getDescription() %}
+                    <p>{{ post.getDescription()|striptags[:240] ~ ' ...' }}</p>
+                {% endif %}
+            </div><!-- /.post-excerpt -->
+
+            <a href="{{ path('post_detail', {'slug': post.getSlug() })}}" class="btn">{{ 'Read More'|trans }}</a>
+        </div><!-- /.post-content -->
+    </div><!-- /.post-inner -->
+</div><!-- /.post -->

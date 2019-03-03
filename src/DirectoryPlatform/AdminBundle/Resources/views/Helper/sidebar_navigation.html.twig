@@ -1,0 +1,83 @@
+<ul class="nav nav-primary flex-column">
+    <li class="nav-item">
+        <a href="{{ path('admin_dashboard') }}" class="nav-link {% if active is defined and active == 'dashboard' %}active{% endif %}">
+            <i class="fa fa-tachometer"></i><span>{{ 'Dashboard'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_listing') }}" class="nav-link {% if active is defined and active == 'listings' %}active{% endif %}">
+            <i class="fa fa-map-marker"></i><span>{{ 'Listings'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_claim') }}" class="nav-link {% if active is defined and active == 'claims' %}active{% endif %}">
+            <i class="fa fa-hand-paper-o"></i><span>{{ 'Claims'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_report') }}" class="nav-link {% if active is defined and active == 'reports' %}active{% endif %}">
+            <i class="fa fa-flag"></i><span>{{ 'Reports'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_post') }}" class="nav-link {% if active is defined and active == 'posts' %}active{% endif %}">
+            <i class="fa fa-book"></i><span>{{ 'Blog Posts'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_review') }}" class="nav-link {% if active is defined and active == 'reviews' %}active{% endif %}">
+            <i class="fa fa-star"></i><span>{{ 'Reviews'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_order') }}" class="nav-link {% if active is defined and active == 'orders' %}active{% endif %}">
+            <i class="fa fa-shopping-cart"></i><span>{{ 'Orders'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_user') }}" class="nav-link {% if active is defined and active == 'users' %}active{% endif %}">
+            <i class="fa fa-users"></i><span>{{ 'Users'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_inquire') }}" class="nav-link {% if active is defined and active == 'inquires' %}active{% endif %}">
+            <i class="fa fa-comment"></i><span>{{ 'Inquires'|trans }}</span>
+        </a>
+    </li>            
+
+    <li class="nav-item">
+        <a href="{{ path('admin_subscriber') }}" class="nav-link {% if active is defined and active == 'subscribers' %}active{% endif %}">
+            <i class="fa fa-envelope"></i><span>{{ 'Subscribers'|trans }}</span>
+        </a>
+    </li>                        
+</ul>
+
+<strong class="nav-primary-title">{{ 'Taxonomies'|trans }}</strong>
+
+<ul class="nav nav-primary flex-column">
+    <li class="nav-item">
+        <a href="{{ path('admin_category') }}" class="nav-link {% if active is defined and active == 'categories' %}active{% endif %}">
+            <i class="fa fa-tags"></i><span>{{ 'Categories'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_location') }}" class="nav-link {% if active is defined and active == 'locations' %}active{% endif %}">
+            <i class="fa fa-map-o"></i><span>{{ 'Locations'|trans }}</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ path('admin_amenity') }}" class="nav-link {% if active is defined and active == 'amenities' %}active{% endif %}">
+            <i class="fa fa-check"></i><span>{{ 'Amenities'|trans }}</span>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,28 @@
+services:
+    twig.extension.cart:
+        class: DirectoryPlatform\AppBundle\Twig\CartExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+    twig.extension.global:
+        class: DirectoryPlatform\AppBundle\Twig\GlobalExtension
+        public: false
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    # Subscribers
+    directory_platform.user_subscriber:
+        class: DirectoryPlatform\AppBundle\EventListener\UserSubscriber
+        arguments: ['@service_container']
+        tags:
+            - { name: kernel.event_subscriber }
+    directory_platform.order_subscriber:
+        class: DirectoryPlatform\AppBundle\EventListener\OrderSubscriber
+        arguments: ['@service_container']
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }

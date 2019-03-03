@@ -1,0 +1,27 @@
+<div class="hero-wrapper">
+    <div class="hero">
+        <div class="container">
+            <h1>{{ 'Search City Gems'|trans }}</h1>
+            <p>{{ 'Find the best spots or places in your city by using our directory theme. Start listing anything today.'|trans }}</p>
+
+            {{ form_start(filter, {'name': 'filter-hero-form'}) }}
+            {{ form_widget(filter) }}
+            {{ form_end(filter) }}
+
+            {% if categories_popular|length %}
+                <div class="hero-categories">
+                    <strong>{{ 'Popular categories'|trans }}</strong>
+
+                    <ul>
+                        {% for category in categories_popular %}
+                            <li>
+                                <a href="{{ path('category_detail', {'slug': category.getSlug()})}}">
+                                    {{ category.getName() }} <span>({{ category.getListings()|length }})</span>
+                                </a>{% if not loop.last %},{% endif %}</li>
+                        {% endfor %}
+                    </ul>
+                </div><!-- /.hero-categories -->
+            {% endif %}
+        </div><!-- /.container -->
+    </div><!-- /.hero -->
+</div><!-- /.hero-wrapper -->

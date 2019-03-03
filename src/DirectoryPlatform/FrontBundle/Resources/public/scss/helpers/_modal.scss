@@ -1,0 +1,11 @@
+.modal {
+	.close {
+		font-size: 14px;
+		opacity: 1;
+
+		.fa {
+			color: rgba($color-black, .3);
+			font-size: 14px;
+		}		
+	}
+}

@@ -1,0 +1,77 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'orders' %}
+
+{% set title = 'Orders'|trans %}
+
+{% set breadcrumbs = [
+	{
+		'link': path('homepage'), 'title': 'Home'|trans,
+	},
+	{
+		'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+	},
+	{
+		'title': 'Orders'|trans
+	}
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if orders|length %}
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="table-min-width table-center">{{ 'ID'|trans }}</th>                        
+                        <th class="table-min-width">{{ 'Price'|trans }}</th>                        
+                        <th>{{ 'Type'|trans }}</th>   
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td class="table-min-width table-center">{{ order.getId() }}</td>
+                            <td class="table-min-width">{{ order.getPrice()|localizedcurrency(currency) }}</td>
+                            <td>
+                                {% if order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_NEW') %}
+                                    {{ 'New'|trans }}
+                                {% elseif order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_COMPLETED') %}
+                                    {{ 'Completed'|trans }}
+                                {% elseif order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_CANCELED') %}
+                                    {{ 'Cancelled'|trans }}                                    
+                                {% endif %}
+                            </td>
+                            <td class="table-min-width">
+                                {% if order.getStatus() == constant('DirectoryPlatform\\AppBundle\\Entity\\Order::STATUS_NEW') %}
+                                    <div class="btn-group">
+                                        <a href="{{ path('admin_order_complete', {'id': order.getId()}) }}" class="btn">
+                                            {{ 'Complete'}}
+                                        </a>
+
+                                        <a href="{{ path('admin_order_cancel', {'id': order.getId()}) }}" class="btn">
+                                            {{ 'Cancel'}}
+                                        </a>
+                                    </div><!-- /.btn-group -->
+                                {% else %}
+                                    <div class="btn-group">
+                                        {{ 'Nothing to do'|trans }}
+                                    </div><!-- /.btn-group -->
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(orders) }}
+            </div><!-- /.navigation -->
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+<div class="review">
+    <div class="review-author">
+        <div class="review-author-avatar" 
+             {% if review.getUser() and review.getUser().getProfile() and review.getUser().getProfile().getAvatarImage() %}style="background-image: url('{{ vich_uploader_asset(review.getUser().getProfile(), 'avatarImage') }}');"{% endif %}>
+        </div><!-- /.review-author-avatar -->
+    </div><!-- /.review-author -->
+
+    <div class="review-content">
+        <div class="review-meta">
+            <div class="review-meta-author-name">
+                {% if review.getUser() %}
+                    {{ review.getUser().getDisplayName() }}
+                {% else %}
+                    {{ review.getName() }}
+                {% endif %}
+            </div><!-- /.review-meta-author-name -->
+
+            <div class="review-meta-date">
+                {{ review.getCreated()|date }}
+            </div><!-- /.review-meta-date -->
+        </div><!-- /.review-meta -->
+
+        <div class="review-description">
+            {{ review.getDescription() }}
+        </div><!-- /.review-description -->
+    </div><!-- /.review-content -->
+
+    {% if review.getRatings()|length %}
+        <div class="review-ratings">
+            <div class="row">
+                {% for rating in review.getRatings() %}
+                    <div class="col-sm-4">
+                        <div class="rating-wrapper">
+                            <strong>{{ rating.getLabel() }}</strong>
+
+                            <select class="rating" data-value="{{ rating.getValue() }}" data-max="{{ rating.getMax() }}">
+                                {% for i in range(1, rating.getMax()) %}
+                                    <option {% if rating.getValue()|abs == i %}selected{% endif %} value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div><!-- /.rating-wrapper -->
+                    </div><!-- /.col-* -->
+                {% endfor %}
+            </div><!-- /.row -->
+        </div><!-- /.ratings -->
+    {% endif %}
+</div><!-- /.review -->

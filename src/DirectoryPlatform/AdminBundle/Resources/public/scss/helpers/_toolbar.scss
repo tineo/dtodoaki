@@ -1,0 +1,93 @@
+.toolbar {
+  background-color: darken($color-black, 2%);
+  min-width: 64px;
+  position: relative;
+  width: 64px;
+
+  @include media-breakpoint-up(lg) {
+    .nav-bottom {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .nav-primary-title {
+    display: none;
+  }
+
+  .nav-primary {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+
+    .nav-link {
+      span {
+        display: none;
+      }
+
+      &.active {
+        .fa {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+
+  .nav-item {
+    .nav-link {
+      color: rgba(#fff, .8);
+      height: 44px;
+      line-height: 44px;
+      margin: 0 0 5px 0;
+      padding: 0;
+      text-align: center;
+
+      .fa {
+        margin: 0 auto;
+        width: 37px;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    &:last-child {
+      .nav-link {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.toolbar-inner {
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  position: sticky;
+  right: 0;
+  top: 0;
+}
+
+.toolbar-title {
+  border-bottom: 1px solid rgba(#fff, .05);
+  margin: 0 0 20px 0;
+  padding: 23px 0;
+}
+
+.toolbar-avatar {
+  background-color: #dadada;  
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 37px;
+  margin: 0 auto;
+  position: relative;
+  width: 37px; 
+}

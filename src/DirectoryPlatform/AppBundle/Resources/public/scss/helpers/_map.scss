@@ -1,0 +1,275 @@
+/**
+ * Search for GPS position
+ */
+.google-map-search {
+  background-color: rgba($color-black, .04);
+  height: 280px;
+  margin: 0 0 20px 0;
+}
+
+/**
+ * Google map single element
+ */
+.google-map-position {
+  background-color: rgba($color-black, .08);
+  height: 250px;
+  margin: 0;
+}
+
+/**
+ * Element address description
+ */
+.google-map-content {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0 0 0;
+}
+
+.google-map-address {
+  flex-grow: 1;
+
+  address {
+    color: rgba($color-black, .5);
+    margin: 0;
+  }
+}
+
+.google-map-direction {
+  a {
+    color: rgba($color-black, .5);
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+
+      .fa {
+        color: $color-primary;
+      }
+    }
+
+    .fa {
+      margin: 0 0 0 5px;
+      color: rgba($color-black, .1);
+      transition: all .2s ease;
+    }
+  }
+}
+
+/**
+ * Marker
+ */
+.marker {
+  background-image: url('/bundles/front/img/marker.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 51px 60px;
+  cursor: pointer;
+  height: 60px;
+  width: 51px;
+
+  .fa {
+    color: $color-primary;
+    font-size: 15px;
+    margin: 15px 0 0 16px;
+  }
+}
+
+.marker-image {
+  background-color: rgba($color-black, .08);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  border-radius: 50%;
+  height: 33px;
+  left: 9px;
+  position: absolute;
+  top: 6px;
+  width: 33px;
+}
+
+.google-map-markers {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;  
+
+    .cluster {
+      color: #fff;
+
+      > div {
+        background-color: $color-black;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px rgba($color-black, .2);
+        color: #fff;
+        font-family: $font-primary;
+        font-weight: 700;
+        height: 36px;
+        width: 36px;
+      }
+    }
+}
+
+.content-map-actions {
+  margin: 0 0 0 15px;
+  position: fixed;
+  top: calc(50% + 42px);
+  transform: translateY(-50%);
+  z-index: 999;
+}
+
+.content-map-action {
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba($color-black, .2);
+  color: rgba($color-black, .5);
+  cursor: pointer;
+  display: block;
+  font-size: 10px;
+  height: 26px;
+  line-height: 28px;
+  margin: 10px 0;
+  text-align: center;
+  width: 26px;
+  z-index: 999; 
+
+  &:hover {
+    background-color: $color-primary;
+    color: #fff;
+  }
+}
+
+/**
+ * Infobox
+ */
+.infobox {    
+  background-color: $color-gray;
+  border-radius: 5px;
+  box-shadow: 0 0 12px rgba($color-black, .2);
+  color: $color-black;
+  font-family: $font-primary;
+  font-size: 13px;
+  height: 250px;  
+  overflow: hidden;
+  position: relative;
+  width: 320px;
+}
+
+.infobox-close {
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  position: absolute;
+  right: 16px;
+  text-shadow: 0 0 4px rgba($color-black, .4); 
+  top: 16px;
+  transition: all .2s ease;
+  z-index: 100;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+h3.infobox-title {
+  color: $color-black; 
+  font-size: 18px;
+  font-family: $font-secondary;
+  font-weight: 400; 
+  line-height: 1;
+  margin: 0;
+  padding: 16px;
+
+  a {
+    color: $color-black;
+    text-decoration: none;
+  }
+}
+
+.infobox-content {
+  overflow: hidden;
+  background-color: #fff; 
+}
+
+.infobox-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;  
+  position: relative;
+
+  ul {
+    bottom: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 6px;
+    z-index: 2;
+
+    li {
+      float: left;
+      margin: 0 8px;
+    }
+
+    a {
+      color: #fff;  
+      font-size: 14px;
+      text-shadow: 0 1px 1px rgba($color-black, .3);
+    }
+  }
+
+  &:after {
+    background-image: linear-gradient(to top, rgba($color-black, .7), transparent 30px);
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.infobox-body {
+  font-size: 13px;
+  padding: 12px 12px 0 12px;  
+  width: 50%;
+
+  p {
+    margin: 0 0 10px 0;
+    
+    strong {
+      
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.infobox-body-inner {
+  height: 157px;
+}
+
+.infobox-price {
+  background-color: $color-primary;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba($color-black, .3);
+  color: #fff;  
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 10px 10px 0; 
+  padding: 4px 7px;
+  text-transform: uppercase;
+  vertical-align: top;
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,182 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: es
+
+framework:
+    #esi: ~
+    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['es'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+      - 'AppBundle:Form:bootstrap.html.twig'
+      - 'AppBundle:Form:collection.html.twig'
+    globals:
+        google_maps_api_key: "%google_maps_api_key%"
+        google_analytics_code: "%google_analytics_code%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        dql:
+            numeric_functions:
+                degrees: DoctrineExtensions\Query\Mysql\Degrees
+                acos: DoctrineExtensions\Query\Mysql\Acos
+                sin: DoctrineExtensions\Query\Mysql\Sin
+                radians: DoctrineExtensions\Query\Mysql\Radians
+                cos: DoctrineExtensions\Query\Mysql\Cos
+
+
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    host: '%mailer_host%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    spool: { type: memory }
+
+# FOS User
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: DirectoryPlatform\AppBundle\Entity\User
+    from_email:
+        address: you@example.com
+        sender_name: You
+
+# File Uploader
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        image:
+            uri_prefix:         /uploads/listings/images
+            upload_destination: '%kernel.root_dir%/../web/uploads/listings/images'
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+        avatar_image:
+            uri_prefix:         /uploads/avatars
+            upload_destination: '%kernel.root_dir%/../web/uploads/avatars'
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+
+# Pagination
+knp_paginator:
+    page_range:                 5          # default page range used in pagination control
+    default_options:
+        page_name:              page       # page query parameter name
+        sort_field_name:        sort       # sort field query parameter name
+        sort_direction_name:    direction  # sort direction query parameter name
+        distinct:               true       # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: AppBundle:Helper:pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+# Assetic
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    bundles:        ['AdminBundle', 'AppBundle', 'FrontBundle']
+    filters:
+        cssrewrite: ~
+
+# Payum
+payum:
+    security:
+        token_storage:
+          DirectoryPlatform\AppBundle\Entity\PaymentToken: { doctrine: orm}
+    storages:
+        DirectoryPlatform\AppBundle\Entity\Payment: { doctrine: orm}
+    gateways:
+        paypal_express_checkout:
+            factory: paypal_express_checkout
+            username:  '%paypal_username%'
+            password: '%paypal_password%'
+            signature: '%paypal_signature%'
+            sandbox: '%paypal_sandbox%'
+
+app:
+    project_name: 'Directory Platform'
+    map_styles: '[{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#f49935"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#fad959"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"road.local","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#a1cdfc"},{"saturation":30},{"lightness":49}]}]'
+    currency: 'USD'
+    email_from: 'info@example.com'
+    payments:
+        pay_for_featured:
+            enabled: true
+            price: 9.99
+            duration: 14 # No. of days, 0 is unlimited
+        pay_for_publish:
+            enabled: true
+            price: 29.99
+            duration: 30 # No. of days, 0 is unlimited
+    gateways:
+        wire:
+            enabled: true
+            id: 'wire'
+            name: 'Wire Transfer'
+        paypal:
+            enabled: true
+            id: 'paypal'
+            name: 'PayPal Express Checkout'
+    invoicing:
+        full_name: 'Company Full Name'
+        reg_no: 'Registration Number'
+        vat_no: 'VAT Number'
+        street: 'Street / P.O.Box'
+        postal_code: 'Postal Code'
+        city: 'City'
+        country: 'Country'
+        bank_name: 'Your Bank Name'
+        bank_account: '123456789'
+        bank_iban: 'IBAN123456789'
+        bank_swift: 'ABCDEFG'
+        bank_code: '4321'
+        notice: 'Nullam rutrum nec lectus a maximus. Mauris eget turpis in sapien blandit tincidunt. Proin a neque interdum.'
+        constant_symbol: '1235'
+        days_due: 14

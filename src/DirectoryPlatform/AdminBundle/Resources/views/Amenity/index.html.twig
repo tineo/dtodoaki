@@ -1,0 +1,55 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'amenities' %}
+
+{% set title = 'Amenities'|trans %}
+
+{% set actions = [
+	{
+		'link': path('admin_amenity_create'),
+		'title': 'Create'|trans,
+	}
+] %}
+
+{% set breadcrumbs = [
+	{
+		'link': path('homepage'), 'title': 'Home'|trans,
+	},
+	{
+		'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+	},
+	{
+		'title': 'Amenities'|trans
+	}
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if amenities|length %}
+        <div class="table-wrapper">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'Name'|trans }}</th>
+                        <th class="table-min-width table-center">{{ 'Slug'|trans }}</th>
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for amenity in amenities %}
+                        {% include 'AdminBundle::Amenity/row.html.twig' %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(amenities) }}
+            </div>
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

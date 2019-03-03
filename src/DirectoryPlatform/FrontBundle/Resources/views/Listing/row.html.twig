@@ -1,0 +1,60 @@
+<div class="listing-row">
+    <div class="listing-row-inner">
+        <div
+            {% if listing.getFeaturedImage() %}
+                style="background-image: url('{{ vich_uploader_asset(listing.getFeaturedImage(), 'image') }}');"
+            {% endif %}
+           class="listing-row-image">
+
+           <a href="{{ path('listing_detail', {'slug': listing.getSlug()}) }}" class="listing-row-image-link"></a>
+
+            {% if listing.getPrice() %}
+                <div class="listing-row-image-price">
+                    {{ listing.getPrice()|localizedcurrency(currency) }}
+                </div><!-- /.listing-row-image-price -->
+            {% endif %}
+
+            <div class="listing-row-image-favorites">
+                <i class="fa fa-heart"></i> <span>{{ listing.getFavorites()|length }}</span>
+            </div><!-- /.listing-row-image-favorites -->
+        </div>
+
+        <div class="listing-row-content">
+            {% if listing.getIsFeatured() %}
+                <div class="listing-row-featured">
+                    {{ 'Featured'|trans }}
+                </div><!-- /.listing-row-image-featured -->
+            {% endif %}
+
+            <h3>
+                <a href="{{ path('listing_detail', {slug: listing.getSlug()}) }}">
+                    {{ listing.getName() }}
+                </a>
+
+                {% if listing.getIsVerified() %}
+                    <i class="fa fa-check"></i>
+                {% endif %}
+            </h3>
+
+            {% if listing.getDescription() %}
+                <p>{{ listing.getDescription()|striptags[:240] ~ ' ...' }}</p>
+            {% endif %}
+
+            {% if not listing.getRating() %}
+                <div class="listing-row-rating no">
+                    {{ 'No ratings, yet.'|trans }}
+                </div>
+            {% else %}
+                <div class="listing-row-rating">
+                    {% for i in range(1, 5) %}
+                        {% if i <= listing.getRating() %}
+                            <i class="fa fa-star"></i>
+                        {% else %}
+                            <i class="fa fa-star-o"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div><!-- /.listing-row-rating -->
+            {% endif %}
+        </div><!-- /.listing-row-content -->
+    </div><!-- /.listing-row-inner -->
+</div><!-- /.listing-row -->

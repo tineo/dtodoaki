@@ -1,0 +1,9 @@
+{% for type, flashes in app.session.flashbag.all %}
+    {% for flash in flashes %}
+        <div class="alert alert-{{ type }}">
+        	<div class="alert-inner">
+            	{{ flash }}
+            </div><!-- /.alert-inner -->
+        </div><!-- /.alert -->
+    {% endfor %}
+{% endfor %}

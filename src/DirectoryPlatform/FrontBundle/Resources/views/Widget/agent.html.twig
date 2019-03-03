@@ -1,0 +1,49 @@
+<div class="post-block">
+    <div {% if user.getProfile() %}style="background-image: url('{{ vich_uploader_asset(user.getProfile(), 'avatarImage') }}');"{% endif %}
+         class="post-user-avatar">
+    </div><!-- /.post-user-avatar -->
+
+    <div class="post-user-name">
+        <a href="{{ path('agent', {'id': user.getId()}) }}">{{ user.getDisplayName() }}</a>
+    </div><!-- /.post-user-name -->
+
+    {% if user.getProfile() %}
+        <div class="post-user-meta">
+            {% if user.getProfile().getPhone() %}
+                <div class="post-user-meta-item">
+                    {{ user.getProfile().getPhone() }}
+                </div><!-- /.post-user-meta-item -->
+            {% endif %}
+
+            {% if user.getProfile().getWebsite() %}
+                <div class="post-user-meta-item">
+                    <a href="{{ user.getProfile().getWebsite() }}" target="_blank">
+                        {{ user.getProfile().getWebsite()|trim('https://')|trim('http://') }}
+                    </a>
+                </div><!-- /.post-user-meta-item -->
+            {% endif %}
+        </div><!-- /.post-user-meta -->
+
+        {% if user.getProfile().getFacebook() or user.getProfile().getTwitter() or user.getProfile().getLinkedin()%}
+            <div class="post-user-social">
+                {% if user.getProfile().getFacebook() %}
+                    <a href="{{ user.getProfile().getFacebook() }}">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                {% endif %}
+
+                {% if user.getProfile().getTwitter() %}
+                    <a href="{{ user.getProfile().getTwitter() }}">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                {% endif %}
+
+                {% if user.getProfile().getLinkedin() %}
+                    <a href="{{ user.getProfile().getLinkedin() }}">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                {% endif %}
+            </div><!-- /.post-user-social -->
+        {% endif %}
+    {% endif %}
+</div><!-- /.post-block -->

@@ -1,0 +1,25 @@
+{% extends "FrontBundle::Layout/base.html.twig" %}
+
+{% block title %}
+    {{ 'Forgot Password?'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="form-center">
+        <h1>{{ 'Reset Password'|trans }}</h1>
+
+        <p>
+            {% trans with {'%link%': path('fos_user_security_login')} %}
+                Type your e-mail address below and we will get in touch with you as soon as possible.
+            {% endtrans %}
+        </p>
+
+        {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+
+        <ul>
+            <li><a href="{{ path('homepage') }}">{{ 'Return Back'|trans }}</a></li>
+            <li><a href="{{ path('fos_user_security_login') }}">{{ 'Sign In'|trans }}</a></li>
+            <li><a href="{{ path('fos_user_registration_register') }}">{{ 'Registration'|trans }}</a></li>
+        </ul>
+    </div><!-- /.form-center -->
+{% endblock %}

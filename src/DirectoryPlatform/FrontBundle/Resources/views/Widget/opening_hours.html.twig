@@ -1,0 +1,9 @@
+{% if listing.getOpeningHours() %}
+    <div class="post-block">
+        <h3>{{ 'Opening Hours'|trans }}</h3>
+
+        <div class="opening-hours">
+            {{ listing.getOpeningHours()|nl2br }}
+        </div><!-- /.opening-hours -->
+    </div><!-- /.post-block -->
+{% endif %}

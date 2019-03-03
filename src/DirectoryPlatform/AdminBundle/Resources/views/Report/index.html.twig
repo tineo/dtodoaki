@@ -1,0 +1,79 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'reports' %}
+
+{% set title = 'Reports'|trans %}
+
+{% set breadcrumbs = [
+	{
+		'link': path('homepage'), 'title': 'Home'|trans,
+	},
+	{
+		'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+	},
+	{
+		'title': 'Reports'|trans
+	}
+] %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if reports|length %}
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="table-min-width">{{ 'Listing'|trans }}</th>
+                        <th class="table-min-width">{{ 'User'|trans }}</th>
+                        <th>{{ 'Message'|trans }}</th>
+                        <th class="table-min-width table-center">{{ 'Approved'|trans }}</th>
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for report in reports %}
+                        <tr>
+                            <td class="table-min-width">
+                                <a href="{{ path('listing_detail', {'slug': report.getListing().getSlug()}) }}" target="_blank">
+                                    {{ report.getListing().getName() }}
+                                </a>
+                            </td>
+
+                            <td class="table-min-width">                                
+                                {{ report.getUser().getDisplayName() }}
+                            </td>                            
+
+                            <td>{{ report.getMessage() }}</td>
+
+                            <td class="table-min-width table-center table-status">
+                                {% if report.getIsApproved() %}
+                                    <i class="fa fa-check"></i>
+                                {% else %}
+                                    <i class="fa fa-close"></i>
+                                {% endif %}
+                            </td>
+
+                            <td class="table-min-width">
+                                <div class="btn-group">
+                                    {% if not report.getIsApproved() %}
+                                        <a href="{{ path('admin_report_approve', {'id': report.getId() })}}" class="btn">{{ 'Approve'|trans }}</a>
+                                    {% else %}
+                                        {{ 'Nothing to do'|trans }}
+                                    {% endif %}
+                                </div><!-- /.btn-group -->
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(reports) }}
+            </div>
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

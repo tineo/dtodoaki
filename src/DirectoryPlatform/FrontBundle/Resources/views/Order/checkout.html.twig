@@ -1,0 +1,24 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Checkout'|trans %}
+
+{% block title %}{{ 'Checkout'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'FrontBundle::Helper/content_title.html.twig' %}
+
+        {{ form_start(order) }}
+            <fieldset class="fieldset-gateway">
+                <legend>{{ 'Payment Gateway'|trans }}</legend>
+                {{ form_row(order.gateway) }}
+            </fieldset>
+
+            <fieldset class="fieldset-company">
+                <legend>{{ 'Company Information'|trans }}</legend>
+                {{ form_rest(order) }}
+            </fieldset>
+
+        {{ form_end(order) }}
+    </div><!-- /.container -->
+{% endblock %}

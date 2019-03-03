@@ -1,0 +1,70 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'users' %}
+
+{% set title = 'Users'|trans %}
+
+{% set actions = [
+    {
+        'link': path('admin_user_create'),
+        'title': 'Create'|trans,
+    }
+] %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+    },
+    {
+        'title': 'Users'|trans
+    }
+] %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if users|length %}
+        <div class="table-wrapper">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'Title'|trans }}</th>
+                        <th class="table-min-width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>
+                                {{ user.getDisplayName() }}
+                            </td>
+
+                            <td class="table-min-width">
+                                <div class="btn-group">
+                                    <a href="{{ path('admin_user_update', {'id': user.getId()}) }}" class="btn">
+                                        {{ 'Update' }}
+                                    </a>
+
+                                    <a href="{{ path('admin_user_delete', {'id': user.getId()}) }}" class="btn">
+                                        {{ 'Delete' }}
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation">
+                {{ knp_pagination_render(users) }}
+            </div><!-- /.navigation -->
+        </div><!-- /.table-wrapper -->
+    {% else %}
+        {{ include('AppBundle::Helper/empty.html.twig') }}
+    {% endif %}
+{% endblock %}

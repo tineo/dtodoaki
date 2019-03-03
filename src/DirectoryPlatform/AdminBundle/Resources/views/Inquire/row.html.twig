@@ -1,0 +1,25 @@
+<tr>
+    <td>{{ inquire.getAuthorName() }}</td>
+
+    <td>
+        <a href="{{ path('listing_detail', {'slug': inquire.getListing().getSlug() }) }}" target="_blank">
+            {{ inquire.getListing().getName() }}
+        </a>
+    </td>
+
+    <td class="table-min-width">
+        {{ inquire.getCreated()|date }}
+    </td>
+
+    <td class="table-min-width">
+        <div class="btn-group">
+            <a href="{{ path('admin_inquire_update', {'id': inquire.getId()}) }}" class="btn">
+                {{ 'Update' }}
+            </a>
+
+            <a href="{{ path('admin_inquire_delete', {'id': inquire.getId()}) }}" class="btn">
+                {{ 'Delete' }}
+            </a>
+        </div>
+    </td>
+</tr>

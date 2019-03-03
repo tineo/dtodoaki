@@ -1,0 +1,66 @@
+.stat {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba($color-black, .05);
+  margin: 0 0 30px 0;
+  overflow: hidden;
+  padding: 30px;
+  position: relative;
+
+  &.stat-green {
+    background-color: $color-green;
+    background-image: linear-gradient(to right, lighten($color-green, 3%), darken($color-green, 3%));
+  }
+
+  &.stat-red {
+    background-color: $color-red;
+    background-image: linear-gradient(to right, lighten($color-red, 3%), darken($color-red, 3%));
+  }
+
+  &.stat-blue {
+    background-color: $color-blue;
+    background-image: linear-gradient(to right, lighten($color-blue, 3%), darken($color-blue, 3%));
+  }    
+
+  &.stat-orange {
+    background-color: $color-orange;
+    background-image: linear-gradient(to right, lighten($color-orange, 3%), darken($color-orange, 3%));
+  }      
+}
+
+.stat-key {
+  color: rgba($color-black, .5);
+  display: block;
+  font-size: 16px;
+  line-height: 1;
+  margin: 0 0 10px 0;
+
+  .stat-green &, .stat-red &, .stat-blue &, .stat-orange & {
+    color: rgba(#fff, .7);
+  }
+}
+
+.stat-value {
+  display: block;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1;
+  margin: -5px 0 0 0;
+
+  .stat-green &, .stat-red &, .stat-blue &, .stat-orange & {
+    color: #fff;
+  }
+}
+
+.stat-icon {
+  color: rgba($color-black, .06);
+  font-size: 80px;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  .stat-green &, .stat-red &, .stat-blue &, .stat-orange & {
+    color: rgba(#fff, .2);
+  }
+}

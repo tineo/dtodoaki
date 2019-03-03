@@ -1,0 +1,23 @@
+<div class="cta">
+    <div class="container">
+        <div class="cta-inner">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="cta-content">
+                        <h3>{{ 'Get best listing notifications happening near you.'|trans }}</h3>
+
+                        <p>
+                            {{ 'Once per month we will post you e-mail informing you about nearby events. We promise that we will not share your e-mail address. You can always have an option to unsubscribe.'|trans }}
+                        </p>
+                    </div><!-- /.cta-content -->
+                </div><!-- /.col-* -->
+
+                <div class="col-md-4">
+                    <div class="cta-form">
+                        {{ render(controller('FrontBundle:Subscriber:form', {request: app.request})) }}
+                    </div><!-- /.cta-form -->
+                </div><!-- /.col-* -->
+            </div><!-- /.row -->
+        </div><!-- /.cta-inner -->
+    </div><!-- /.container -->
+</div><!-- /.cta -->

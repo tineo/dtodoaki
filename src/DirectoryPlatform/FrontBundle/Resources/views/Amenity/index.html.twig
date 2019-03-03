@@ -1,0 +1,31 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Amenities'|trans %}
+	
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% include 'FrontBundle::Helper/content_title.html.twig' %}		
+
+		<div class="content">
+			<div class="row">
+				{% if amenities|length %}
+					{% for amenity in amenities %}
+						<div class="col-md-4">
+							<a href="{{ path('amenity_detail', {'slug': amenity.getSlug()})}}">
+								{{ amenity.getName() }}
+							</a>
+						</div><!-- /.col-* -->
+					{% endfor %}
+
+		            <div class="navigation">
+		                {{ knp_pagination_render(amenities) }}
+		            </div><!-- /.navigation -->					
+				{% else %}
+					{% include 'AppBundle::Helper/empty.html.twig' %}
+				{% endif %}
+			</div><!-- /.row -->
+		</div><!-- /.content -->
+	</div><!-- /.container -->
+{% endblock %}

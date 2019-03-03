@@ -1,0 +1,156 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+
+{% set title = 'My Listings'|trans %}
+
+{% set actions = [
+    {
+        'link': path('listing_create'),
+        'title': 'Create'|trans,
+    }
+] %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('listing'), 'title': 'Listings'|trans,
+    },
+    {
+        'title': 'My Listings'|trans
+    }
+] %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}    
+    <div class="container">        
+        {% include 'FrontBundle::Helper/content_title.html.twig' %}
+
+        {% if listings|length %}
+            <div class="table-wrapper">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Title'|trans }}</th>
+                            <th class="table-center">{{ 'Category'|trans }}</th>
+                            <th class="table-center">{{ 'Published'|trans }}</th>
+                            <th class="table-center">{{ 'Featured'|trans }}</th>
+                            <th class="table-center">{{ 'Verified'|trans }}</th>
+                            <th class="table-min-width"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for listing in listings %}
+                            <tr>
+                                <td>
+                                    <div class="table-card">
+                                        <div class="table-card-image"
+                                            {% if listing.getFeaturedImage() %}
+                                                style="background-image: url('{{ vich_uploader_asset(listing.getFeaturedImage(), 'image') }}');"
+                                            {% endif %}>
+                                        </div><!-- /.table-card-image -->
+
+                                        <div class="table-card-content">
+                                            <div class="table-card-content-inner">
+                                                <div class="table-card-title">
+                                                    <a href="{{ path('listing_detail', {'slug': listing.getSlug()}) }}" target="_blank">
+                                                        {{ listing.getName() }}
+                                                    </a>
+                                                </div><!-- /.table-card-title -->
+
+                                                {% if listing.getPrice() %}
+                                                    <div class="table-card-subtitle">
+                                                        {{ 'Price'|trans }}: {{ listing.getPrice()|localizedcurrency(currency) }}
+                                                    </div><!-- /.table-card-subtitle -->
+                                                {% endif %}
+                                            </div><!-- /.table-card-content-inner -->
+                                        </div><!-- /.table-card-content -->
+                                    </div><!-- /.table-card -->
+                                </td>
+
+                                <td class="table-min-width table-center">
+                                    {% if listing.getCategory() %}
+                                        <a href="{{ path('category_detail', {'slug': listing.getCategory().getSlug()})}}" target="_blank">
+                                            {{ listing.getCategory().getName() }}
+                                        </a>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+
+                                <td class="table-min-width table-center table-status">
+                                    {% if listing.getIsPublished() %}
+                                        <i class="fa fa-check"></i>
+                                    {% else %}
+                                        <i class="fa fa-close"></i>
+                                    {% endif %}
+                                </td>
+
+                                <td class="table-min-width table-center table-status">
+                                    {% if listing.getIsFeatured() %}
+                                        <i class="fa fa-check"></i>
+                                    {% else %}
+                                        <i class="fa fa-close"></i>
+                                    {% endif %}
+                                </td>
+
+                                <td class="table-min-width table-center table-status">
+                                    {% if listing.getIsVerified() %}
+                                        <i class="fa fa-check"></i>
+                                    {% else %}
+                                        <i class="fa fa-close"></i>
+                                    {% endif %}
+                                </td>
+
+                                <td class="table-min-width">
+                                    <div class="btn-group">                                        
+
+                                        {% if listing.getIsPublished() %}
+                                            <a class="btn" href="{{ path('listing_unpublish', {'id': listing.getId()}) }}">
+                                                {{ 'Unpublish'|trans }}
+                                            </a>
+                                        {% else %}
+                                            <a class="btn" href="{{ path('listing_publish', {'id': listing.getId()}) }}">
+                                                {{ 'Publish'|trans }}
+
+                                                {% if payments.pay_for_publish.enabled %}
+                                                    ({{ payments.pay_for_publish.price|localizedcurrency(currency) }})
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+
+                                        {% if listing.getIsFeatured() %}
+                                            <a class="btn" href="{{ path('listing_unfeature', {'id': listing.getId()}) }}">
+                                                {{ 'Unfeature'|trans }}
+                                            </a>
+                                        {% else %}
+                                            <a class="btn" href="{{ path('listing_feature', {'id': listing.getId()}) }}">
+                                                {{ 'Feature'|trans }}
+                                                {% if payments.pay_for_featured.enabled %}
+                                                    ({{ payments.pay_for_featured.price|localizedcurrency(currency) }})
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                        
+                                        <a class="btn" href="{{ path('listing_update', {'id': listing.getId()}) }}">{{ 'Update'|trans }}</a>
+                                        <a class="btn" href="{{ path('listing_delete', {'id': listing.getId()}) }}">{{ 'Delete'|trans }}</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><!-- /.table-wrapper -->
+
+            <div class="navigation">
+                {{ knp_pagination_render(listings) }}
+            </div><!-- /.navigation -->                     
+        {% else %}
+            {{ include('AppBundle::Helper/empty.html.twig') }}
+        {% endif %}
+    </div><!-- /.container -->
+{% endblock %}

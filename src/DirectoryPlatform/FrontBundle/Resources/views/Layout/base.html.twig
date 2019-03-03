@@ -1,0 +1,17 @@
+{% extends 'FrontBundle::Layout/default.html.twig' %}
+
+{% block body %}
+    <div class="page-wrapper">
+        {% include('FrontBundle::Helper/header.html.twig') %}
+
+        {% include('AppBundle::Helper/messages.html.twig') %}
+
+        <div class="main-wrapper">
+            {% block content %}{% endblock %}
+        </div><!-- /.main-wrapper -->
+
+        {% include('FrontBundle::Helper/cta.html.twig') %}
+        
+        {% include('FrontBundle::Helper/footer.html.twig') %}
+    </div><!-- /page-wrapper -->
+{% endblock %}

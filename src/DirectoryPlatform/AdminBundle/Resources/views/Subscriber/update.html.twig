@@ -1,0 +1,29 @@
+{% extends 'AdminBundle::Layout/base.html.twig' %}
+
+{% set active = 'subscribers' %}
+
+{% set title = 'Update Subscriber'|trans ~ ' ' ~ subscriber.getEmail() %}
+
+{% set breadcrumbs = [
+    {
+        'link': path('homepage'), 'title': 'Home'|trans,
+    },
+    {
+        'link': path('admin_dashboard'), 'title': 'Dashboard'|trans,
+    },
+    {
+        'link': path('admin_subscriber'), 'title': 'Subscribers'|trans,
+    },
+    {
+        'title': 'Update Subscriber'|trans
+    }
+] %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

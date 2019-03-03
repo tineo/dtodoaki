@@ -1,0 +1,85 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set menu_active = 'home' %}
+    
+{% block title %}{{ 'Listing & Directory Application for Symfony'|trans }}{% endblock %}
+
+{% block body_class %}header-transparent{% endblock %}
+
+{% block content %}
+    {% include 'FrontBundle::Helper/hero.html.twig' %}
+
+    <div class="container">
+        <div class="content mb-70">
+            {% if locations|length %}
+                {% include 'FrontBundle::Helper/page_title.html.twig' with {title: "Discover Popular Locations", description: "Most visited locations in the directory platform. Missing your city? Feel free to let us know."} %}
+
+                <div class="locations-wrapper">
+                    <div class="row">
+                        {% for location in locations %}
+                            <div class="col-md-4">
+                                {% include 'FrontBundle::Location/box.html.twig' %}
+                            </div><!-- /.col-* -->
+                        {% endfor %}
+                    </div><!-- /.row -->
+                </div><!-- /.locations-wrapper -->
+            {% endif %}
+
+            {% if listings|length %}
+                {% include 'FrontBundle::Helper/page_title.html.twig' with {title: "Most Recent Listings"|trans, description: "Find out most recent listings & classifieds added into our directory catalogue by our users."|trans} %}
+
+                <div class="listings-wrapper">
+                    <div class="row">
+                        {% for listing in listings %}
+                            <div class="col-md-4">
+                                {% include 'FrontBundle::Listing/box.html.twig' %}
+                            </div><!-- /.col-* -->
+                        {% endfor %}
+                    </div><!-- /.row -->
+                </div><!-- /.listings-wrapper -->
+            {% endif %}
+
+            {% if categories|length %}
+                {% include 'FrontBundle::Helper/page_title.html.twig' with {title: "Categories & Interests", description: "Most popular categories in system ordered by highest number of assigned listings."} %}
+
+                <div class="categories-wrapper">
+                    <div class="row">
+                        {% for category in categories %}
+                            <div class="col-md-3">
+                                {% include 'FrontBundle::Category/box.html.twig' %}
+                            </div><!-- /.col-* -->
+                        {% endfor %}
+                    </div><!-- /.row -->
+                </div><!-- /.categories-wrapper -->
+
+                <div class="btn-center">
+                    <a href="{{ path('category') }}" class="btn btn-primary">{{ 'Show All Categories'|trans }}</a>
+                </div><!-- /.btn-center -->
+            {% endif %}
+
+            {% if posts|length %}
+                {% include 'FrontBundle::Helper/page_title.html.twig' with {
+                    title: "Browse Articles & Tips",
+                    description: "Read blog posts about our recommendations and experiences.",
+                    class: "border-top"
+                } %}
+
+                <div class="posts-wrapper">
+                    <div class="row">
+                        <div class="col-md-10 push-md-1">                    
+                            {% for post in posts %}                    
+                                {% include 'FrontBundle::Post/row.html.twig' %}
+                            {% endfor %}
+                        </div><!-- /.col-* -->
+                    </div><!-- /.row -->                    
+                </div><!-- /.posts-wrapper -->
+
+                <div class="btn-center">
+                    <a href="{{ path('post')}}" class="btn btn-primary">
+                        {{ 'Show All Blog Posts'|trans }}
+                    </a>
+                </div><!-- /.btn-center -->
+            {% endif %}
+        </div><!-- /.content -->
+    </div><!-- /.container -->
+{% endblock %}

@@ -1,0 +1,46 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {  
+  font-family: $font-primary;
+  font-size: 14px;
+  height: 100%;
+  overflow-x: hidden;  
+  width: 100%;
+
+  &.admin {
+    background-color: #fcfcfc;
+  }
+}
+
+a {
+  color: $color-primary;
+  text-decoration: underline;
+  transition: color .2s ease;
+
+  &:hover {
+    color: darken($color-primary, 5%);
+  }
+}
+
+p {
+  line-height: 26px;
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: 300;
+  margin: 0 0 20px 0;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0 0 20px 0;
+}
+
+address {
+  font-style: italic;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <title>{% block title %}{% endblock %} | {{ 'Directory Platform'|trans }}</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair+Display:400" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    {% stylesheets
+    '@AppBundle/Resources/public/libraries/bootstrap-select/css/bootstrap-select.min.css'
+    '@AppBundle/Resources/public/libraries/summernote/summernote.css'
+    '@FrontBundle/Resources/public/libraries/magnific-popup/magnific-popup.css'
+    '@FrontBundle/Resources/public/libraries/slick/slick.css'    
+    '@FrontBundle/Resources/public/libraries/nouislider/nouislider.min.css'    
+    '@FrontBundle/Resources/public/libraries/jssocials/jssocials.css'
+    '@FrontBundle/Resources/public/libraries/jssocials/jssocials-theme-minima.css'
+    '@FrontBundle/Resources/public/libraries/barrating/fontawesome-stars.css'
+    '@FrontBundle/Resources/public/libraries/barrating/fontawesome-stars-o.css'
+    '@FrontBundle/Resources/public/css/styles.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css">
+    {% endstylesheets %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+{% block body %}{% endblock %}
+
+{% if not app.user %}
+    {% include 'FrontBundle::Modal/login.html.twig' %}
+    {% include 'FrontBundle::Modal/register.html.twig' %}
+{% endif %}
+
+{% if map_styles %}
+    <script type="text/javascript">
+        var map_styles = {{ map_styles|raw }}
+    </script>
+{% endif %}
+
+
+<script src="//maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&amp;key={% if google_maps_api_key %}{{ google_maps_api_key }}{% endif %}" type="text/javascript"></script>
+
+
+{% javascripts
+'@AppBundle/Resources/public/js/google-map-infobox.min.js'
+'@AppBundle/Resources/public/js/google-map-markerclusterer.js'
+'@AppBundle/Resources/public/js/google-map-richmarker.min.js'
+'@AppBundle/Resources/public/js/jquery.min.js'
+'@AppBundle/Resources/public/js/jquery.collection.js'
+'@AppBundle/Resources/public/libraries/summernote/summernote.min.js'
+'@AppBundle/Resources/public/libraries/bootstrap-select/js/bootstrap-select.min.js'
+'@AppBundle/Resources/public/libraries/bootstrap-select/js/defaults-es_ES.min.js'
+'@AppBundle/Resources/public/js/tether.min.js'
+'@AppBundle/Resources/public/js/bootstrap.min.js'
+'@FrontBundle/Resources/public/libraries/slick/slick.min.js'
+'@FrontBundle/Resources/public/libraries/jssocials/jssocials.min.js'
+'@FrontBundle/Resources/public/js/wNumb.js'
+'@FrontBundle/Resources/public/libraries/nouislider/nouislider.min.js'
+'@FrontBundle/Resources/public/libraries/barrating/jquery.barrating.min.js'
+'@FrontBundle/Resources/public/libraries/magnific-popup/jquery.magnific-popup.min.js'
+'@FrontBundle/Resources/public/js/scripts.js' %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+
+{% if google_analytics_code %}
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '{{ google_analytics_code }}', 'auto');
+        ga('send', 'pageview');
+    </script>
+{% endif %}
+
+</body>
+</html>

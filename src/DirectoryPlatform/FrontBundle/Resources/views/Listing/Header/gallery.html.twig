@@ -1,0 +1,13 @@
+{% if listing.getImages()|length %}
+    <div class="listing-gallery-wrapper">
+        <div class="listing-gallery">
+            {% for image in listing.getImages() %}
+                {% if image.getImageName() is not empty %}
+                    <div class="listing-gallery-item" style="background-image: url('{{ vich_uploader_asset(image, 'image') }}');"></div>
+                {% endif %}
+            {% endfor %}
+        </div><!-- /.listing-gallery -->
+
+        {% include 'FrontBundle::Listing/Header/content.html.twig' %}
+    </div><!-- /.listing-gallery-wrapper -->
+{% endif %}

@@ -1,0 +1,35 @@
+.term {
+	background-color: rgba($color-black, .03); 
+	border-radius: 5px;
+	margin: 0 0 30px 0; 
+	padding: 30px;
+	position: relative;
+
+	&:after {
+		-webkit-font-smoothing: antialiased;
+		content: '\f054';
+		color: $color-primary;
+		display: block;
+		font-family: 'FontAwesome';
+		font-size: 10px;
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+.term-name {
+	display: inline;
+
+	a {
+		color: rgba($color-black, .7);
+		font-size: 16px;
+		text-decoration: none;
+	}
+}
+
+.term-count {
+	color: rgba($color-black, .4);
+	display: inline;
+}

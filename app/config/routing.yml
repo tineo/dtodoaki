@@ -1,0 +1,14 @@
+directory_platform_front:
+    resource: '@FrontBundle/Controller/'
+    type: annotation
+
+directory_platform_admin:
+    resource: '@AdminBundle/Controller/'
+    type: annotation
+    prefix: '/admin'
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+payum_all:
+    resource: "@PayumBundle/Resources/config/routing/all.xml"    

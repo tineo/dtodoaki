@@ -1,0 +1,29 @@
+.page-title {
+  margin: 70px 0;
+  text-align: center;
+
+  h2 {
+    font-family: $font-secondary;
+    font-size: 34px;
+  }
+
+  p {
+    color: rgba($color-black, .5);
+    font-size: 17px;
+    margin: 20px auto 0 auto;
+
+    @include media-breakpoint-up(md) {
+      max-width: 50%;
+    }    
+  }
+
+  &.border-top {
+    border-top: 1px solid rgba($color-black, .06);
+    margin-left: -1200px;
+    margin-right: -1200px;
+    margin-top: 70px;
+    padding-left: 1200px;
+    padding-right: 1200px;
+    padding-top: 70px;
+  }
+}

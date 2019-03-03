@@ -1,0 +1,25 @@
+{% if listing.getLatitude() and listing.getLongitude() %}
+    <div class="post-block">
+        {% spaceless %}
+            <div id="google-map-object"
+                 {% if listing.getFeaturedImage() %}data-image="{{ vich_uploader_asset(listing.getFeaturedImage(), 'image') }}"{% endif %}
+                 {% if listing.getLatitude() %}data-latitude="{{ listing.getLatitude() }}"{% endif %}
+                 {% if listing.getLongitude() %}data-longitude="{{ listing.getLongitude() }}"{% endif %}
+                 class="google-map-position"></div>
+        {% endspaceless %}
+
+        <div class="google-map-content">
+            <div class="google-map-address">
+                {% if listing.getAddress() %}
+                    <address>{{ listing.getAddress()|nl2br }}</address>
+                {% endif %}
+            </div><!-- /.google-map-address -->
+
+            <div class="google-map-direction">
+                <a href="https://maps.google.com?daddr={{ listing.getLatitude() }},{{ listing.getLongitude() }}" target="_blank">
+                    {{ 'Get Direction'|trans }} <i class="fa fa-long-arrow-right"></i>
+                </a>
+            </div><!-- /.google-map-direction -->
+        </div><!-- /.google-map-content -->
+    </div><!-- /.post-block -->
+{% endif %}

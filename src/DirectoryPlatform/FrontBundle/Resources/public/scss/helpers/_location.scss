@@ -1,0 +1,67 @@
+.locations-wrapper {
+  margin-bottom: -30px;
+}
+
+.locations-wrapper .location {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  color: #fff;
+  height: 260px;
+  margin: 0 0 30px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.location-inner {
+  background-color: rgba($color-black, .5);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.location-link {
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.location-content {
+  bottom: 20px;
+  left: 20px;
+  position: absolute;
+  right: 20px;
+
+  .btn {
+    float: right;
+    margin: 15px 0 0 0;
+  }
+}
+
+.location-title {
+  @include clearfix();
+  float: left;
+
+  h3 {
+    font-size: 28px;
+    font-family: $font-secondary;
+    text-shadow: 1px 1px rgba($color-black, .8);
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  p {
+    color: rgba(#fff, .8);
+    margin: 6px 0 0 0;
+    text-shadow: 1px 1px rgba($color-black, .8);
+  }
+}

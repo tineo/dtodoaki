@@ -1,0 +1,16 @@
+.alert {
+	border: 0;
+	border-radius: 0;
+	margin: -30px -30px 30px -30px;
+	padding: 20px 30px;
+}
+
+.alert-error, .alert-danger {
+	background-color: $color-red;
+	color: #fff;
+}
+
+.alert-success {
+	background-color: $color-green;
+	color: #fff;
+}

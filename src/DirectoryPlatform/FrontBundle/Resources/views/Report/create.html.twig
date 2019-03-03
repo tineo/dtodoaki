@@ -1,0 +1,15 @@
+{% extends 'FrontBundle::Layout/base.html.twig' %}
+
+{% set title = 'Create Report'|trans %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% include 'FrontBundle::Helper/content_title.html.twig' %}
+		
+	    {{ form_start(form) }}
+	    {{ form_widget(form) }}
+	    {{ form_end(form) }}
+	</div><!-- /.container -->
+{% endblock %}

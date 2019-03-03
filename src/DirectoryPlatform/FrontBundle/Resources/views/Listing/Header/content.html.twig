@@ -1,0 +1,23 @@
+<div class="listing-header-content">
+    <div class="container">
+        {% if listing.getIsVerified() %}
+            <div class="listing-header-label">
+                {{ 'Verified Listing'|trans }}
+            </div><!-- /.listing-header-label-->
+        {% endif %}
+
+        <h1>{{ listing.getName() }}</h1>
+
+        {% if listing.getAddress() %}
+            <address>{{ listing.getAddress()|nl2br }}</address>
+        {% endif %}
+
+        {% if actions is defined %}
+            <div class="actions">
+                {% for action in actions %}
+                    <a href="{{ action.link }}" class="btn btn-primary">{{ action.title }}</a>
+                {% endfor %}
+            </div><!-- /.actions -->
+        {% endif %}
+    </div><!-- /.container -->
+</div><!-- /.listing-header-content -->   
